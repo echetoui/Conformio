@@ -9,9 +9,8 @@ export const translations = {
     login: "Log In",
     getStarted: "Get Started",
     // Hero
-    heroTitle: "Become compliant quickly",
-    heroSubTitle: "with SOC 2, ISO 27001, TGV and more",
-    heroDescription: "An all-in-one Canadian platform to automate your compliance quickly and efficiently, adapted to Quebec and Canadian requirements.",
+    heroTitle: "Compliance at the service of your growth",
+    heroSubTitle: "From TGV to SOC 2, everything you need to inspire trust in your customers and investors",
     heroEmailPlaceholder: "Your professional email",
     heroButton: "Join the waitlist",
     // Benefits
@@ -50,9 +49,8 @@ export const translations = {
     login: "Connexion",
     getStarted: "Commencer",
     // Hero
-    heroTitle: "Devenez conforme rapidement",
-    heroSubTitle: "à SOC 2, ISO 27001, TGV et plus encore",
-    heroDescription: "Une plateforme canadienne tout-en-un pour automatiser votre conformité rapidement et efficacement, adaptée aux exigences du Québec et du Canada.",
+    heroTitle: "La conformité au service de votre croissance",
+    heroSubTitle: "De la TGV à SOC 2, tout ce qu'il faut pour inspirer confiance à vos clients et investisseurs",
     heroEmailPlaceholder: "Votre courriel professionnel",
     heroButton: "Rejoindre la liste d'attente",
     // Benefits

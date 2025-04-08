@@ -1,43 +1,82 @@
 import React from 'react';
-import { LinkedinIcon, TwitterIcon, GlobeIcon } from 'lucide-react';
+import { LinkedinIcon, X, Gift } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+
 function Footer() {
-  const {
-    t,
-    language,
-    setLanguage
-  } = useLanguage();
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'fr' : 'en');
-  };
-  return <footer className="py-8 border-t border-primary/10 bg-gradient-to-b from-bg to-bg-soft">
-      <div className="max-w-4xl mx-auto flex flex-col items-center px-4">
-        <div className="text-2xl font-bold text-primary mb-6">
-          <a href="/" className="focus:outline-none focus:ring-2 focus:ring-primary rounded-md hover:text-primary-dark transition-colors">
-            Conformio
-          </a>
-        </div>
-        <div className="flex items-center space-x-8 mb-6">
-          <button onClick={toggleLanguage} className="group flex items-center space-x-2 text-text-soft hover:text-primary transition-all duration-200">
-            <GlobeIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
-            <span className="text-sm font-medium">{t('language')}</span>
-          </button>
-          <a href="https://linkedin.com/company/conformio" target="_blank" rel="noopener noreferrer" className="group flex items-center space-x-2 text-text-soft hover:text-primary transition-all duration-200" aria-label="LinkedIn">
-            <LinkedinIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
-            <span className="text-sm font-medium">LinkedIn</span>
-          </a>
-          <a href="https://x.com/conformio" target="_blank" rel="noopener noreferrer" className="group flex items-center space-x-2 text-text-soft hover:text-primary transition-all duration-200" aria-label="X (Twitter)">
-            <TwitterIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
-            <span className="text-sm font-medium">Twitter</span>
-          </a>
-        </div>
-        <div className="text-sm text-center">
-          <div className="mb-2 text-text-soft">{t('footerDescription')}</div>
-          <div className="text-text-soft">
-            &copy; {new Date().getFullYear()} Conformio. {t('footerRights')}
+  const { t, language, setLanguage } = useLanguage();
+
+  return (
+    <footer className="py-6 bg-bg border-t border-text/10" role="contentinfo">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          {/* Logo et copyright */}
+          <div className="flex items-center gap-2">
+            <motion.a 
+              href="/" 
+              className="text-lg font-bold text-primary hover:text-primary/90" 
+              aria-label="Conformio - Accueil"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              Conformio
+            </motion.a>
+            <span className="text-text/60">
+              © {new Date().getFullYear()}
+            </span>
+          </div>
+
+          {/* Liens */}
+          <nav className="flex items-center gap-6" aria-label="Liens du pied de page">
+            <Link to="/privacy" className="text-sm text-text/80 hover:text-primary transition-colors">
+              {t('footer.privacy')}
+            </Link>
+            <Link to="/terms" className="text-sm text-text/80 hover:text-primary transition-colors">
+              {t('footer.terms')}
+            </Link>
+            <motion.a 
+              href="/contact"
+              className="text-sm text-text/80 hover:text-primary transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {t('nav.contact')}
+            </motion.a>
+          </nav>
+
+          {/* Réseaux sociaux */}
+          <div className="flex items-center gap-4">
+            <a
+              href="https://linkedin.com/company/conformio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text/80 hover:text-primary transition-colors"
+              aria-label="LinkedIn"
+            >
+              <LinkedinIcon className="w-5 h-5" aria-hidden="true" />
+            </a>
+            <a
+              href="https://x.com/conformio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text/80 hover:text-primary transition-colors"
+              aria-label="X (anciennement Twitter)"
+            >
+              <X className="w-5 h-5" aria-hidden="true" />
+            </a>
           </div>
         </div>
+
+        <div className="mt-8 pt-8 border-t border-gray-200">
+          <p className="text-center text-sm text-gray-500">
+            © {new Date().getFullYear()} Conformio. {t('footer.rights')}
+          </p>
+        </div>
       </div>
-    </footer>;
+    </footer>
+  );
 }
+
 export default Footer;

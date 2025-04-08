@@ -1,12 +1,76 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-@keyframes fadeIn {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Sections */
+  .section {
+    @apply py-24 px-6 relative overflow-hidden;
+  }
+
+  /* Typography */
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-text;
+  }
+
+  .section-subtitle {
+    @apply text-xl text-text-soft max-w-2xl mx-auto;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-xl bg-bg/80 backdrop-blur-sm border border-primary/10 
+           shadow-lg shadow-primary/5 hover:shadow-xl hover:shadow-primary/10 
+           transition-all duration-300 hover:-translate-y-1;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply px-6 py-3 bg-primary hover:bg-primary-dark text-white 
+           rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 
+           transition-all duration-200 flex items-center justify-center 
+           disabled:opacity-70 disabled:cursor-not-allowed;
+  }
+
+  /* Forms */
+  .input {
+    @apply w-full px-4 py-3 border border-primary/20 rounded-lg 
+           shadow-sm focus:outline-none focus:ring-2 focus:ring-primary 
+           focus:border-primary bg-bg/80 backdrop-blur-sm 
+           transition-colors hover:border-primary/30;
+  }
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animation-delay-150 {
+  animation-delay: 150ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
 }
 
 @keyframes slideIn {
@@ -20,6 +84,10 @@
   }
 }
 
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
 @keyframes scaleIn {
   from {
     opacity: 0;
@@ -31,26 +99,8 @@
   }
 }
 
-.animate-fade-in {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-.animate-slide-in {
-  animation: slideIn 0.6s ease-out forwards;
-}
-
 .animate-scale-in {
-  animation: scaleIn 0.4s ease-out forwards;
-}
-
-.animation-delay-150 {
-  animation-delay: 0ms;
-}
-
-.animation-delay-300 {
-  animation-delay: 0ms;
+  animation: scaleIn 0.5s ease-out forwards;
 }
 
 html {
