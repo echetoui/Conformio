@@ -1,24 +1,21 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import viteCompression from 'vite-plugin-compression'
+import { VitePluginCompression } from 'vite-plugin-compression2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/Landing-Page-SaaS-Cybers-curit-Moderne/',
   plugins: [
     react(),
     // Gzip compression
-    viteCompression({
+    VitePluginCompression({
       algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024, // Taille minimale pour la compression (1kb)
-      deleteOriginFile: false,
+      exclude: [/\.(br)$/, /\.(gz)$/],
     }),
     // Brotli compression
-    viteCompression({
+    VitePluginCompression({
       algorithm: 'brotliCompress',
-      ext: '.br',
-      threshold: 1024,
-      deleteOriginFile: false,
+      exclude: [/\.(br)$/, /\.(gz)$/],
     })
   ],
   optimizeDeps: {
@@ -28,9 +25,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'motion-vendor': ['framer-motion'],
-          'icons-vendor': ['lucide-react'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'framer-motion': ['framer-motion'],
+          'lucide-react': ['lucide-react'],
         },
       },
     },
@@ -45,7 +42,7 @@ export default defineConfig({
   },
   server: {
     headers: {
-      'Cache-Control': 'public, max-age=31536000',
+      'Cache-Control': 'public, max-age=31536000, immutable',
     },
     port: 3000,
     open: true
