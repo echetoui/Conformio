@@ -44,6 +44,7 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
+    sourcemap: true
   },
   server: {
     headers: {
