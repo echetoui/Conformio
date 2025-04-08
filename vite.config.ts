@@ -22,6 +22,8 @@ export default defineConfig({
     exclude: ['chunk-2YIMICFJ', 'chunk-RLMGAKMB', '@heroicons/react']
   },
   build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -29,6 +31,9 @@ export default defineConfig({
           'framer-motion': ['framer-motion'],
           'lucide-react': ['lucide-react'],
         },
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
       },
     },
     chunkSizeWarningLimit: 1000,
@@ -49,6 +54,6 @@ export default defineConfig({
   },
   preview: {
     port: 3000,
-    open: true,
-  },
+    open: true
+  }
 })
