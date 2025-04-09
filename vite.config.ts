@@ -4,7 +4,7 @@ import compression from 'vite-plugin-compression2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/Landing-Page-SaaS-Cybers-curit-Moderne/',
+  base: process.env.VERCEL ? '/' : '/Landing-Page-SaaS-Cybers-curit-Moderne/',
   plugins: [
     react(),
     // Gzip compression
