@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import escapeHtml from 'escape-html';
 
 dotenv.config();
 
@@ -33,7 +34,7 @@ app.post('/api/send-email', async (req, res) => {
       html: `
         <h2>Nouvelle inscription sur Conformio</h2>
         <p>Un nouveau client s'est inscrit avec l'adresse email suivante :</p>
-        <p><strong>${email}</strong></p>
+        <p><strong>${escapeHtml(email)}</strong></p>
         <p>Date d'inscription : ${new Date().toLocaleString('fr-FR')}</p>
       `
     });
@@ -41,7 +42,7 @@ app.post('/api/send-email', async (req, res) => {
     // Email de confirmation envoyé au client
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: email,
+      to: escapeHtml(email),
       subject: 'Bienvenue chez Conformio',
       html: `
         <h2>Merci de votre inscription chez Conformio</h2>
