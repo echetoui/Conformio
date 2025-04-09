@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
+  "homepage": "https://echetoui.github.io/Landing-Page-SaaS-Cybers-curit-Moderne/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
