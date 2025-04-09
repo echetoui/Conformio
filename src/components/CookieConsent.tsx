@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
 
   useEffect(() => {
     const consent = localStorage.getItem('cookieConsent');

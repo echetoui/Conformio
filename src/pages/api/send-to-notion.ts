@@ -77,7 +77,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.status(200).json({ message: 'Success' });
   } catch (error) {
-    console.error('Error sending to Notion:', error);
     res.status(500).json({ message: 'Error sending to Notion' });
   }
 } 

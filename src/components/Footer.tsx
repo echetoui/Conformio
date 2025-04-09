@@ -1,11 +1,11 @@
 import React from 'react';
-import { LinkedinIcon, X, Gift } from 'lucide-react';
+import { LinkedinIcon, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 function Footer() {
-  const { t, language, setLanguage } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <footer className="py-6 bg-bg border-t border-text/10" role="contentinfo">

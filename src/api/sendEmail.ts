@@ -16,7 +16,6 @@ export async function sendEmail(email: string) {
 
     return await response.json();
   } catch (error) {
-    console.error('Error sending email:', error);
     throw error;
   }
 } 

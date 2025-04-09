@@ -16,7 +16,7 @@ const getValidationMessages = (language: string) => ({
 });
 
 function TrialForm() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -67,9 +67,6 @@ function TrialForm() {
     ]
   };
 
-  console.log('TrialForm rendering...');
-  console.log('Objective options:', objectiveOptions[language]);
-
   const {
     register,
     handleSubmit,
@@ -83,10 +80,7 @@ function TrialForm() {
     }
   });
 
-  console.log('Form errors:', errors);
-
   const onSubmit = async (data: TrialFormData) => {
-    console.log('Form submitted with data:', data);
     setIsSubmitting(true);
     setError('');
 
@@ -101,7 +95,6 @@ function TrialForm() {
 
       setIsSuccess(true);
     } catch (err) {
-      console.error('Form submission error:', err);
       setError('Une erreur est survenue. Veuillez réessayer.');
     } finally {
       setIsSubmitting(false);

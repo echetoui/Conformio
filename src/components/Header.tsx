@@ -1,14 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, X, Gift } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ShieldIcon, FileTextIcon, BoxIcon, ArrowRight, Gift } from 'lucide-react';
 
-const Header = () => {
+export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t, language, setLanguage } = useLanguage();
-  const formRef = useRef<HTMLFormElement>(null);
+  const { language, setLanguage, t } = useLanguage();
   const navigate = useNavigate();
 
   const scrollToForm = () => {
@@ -25,21 +23,16 @@ const Header = () => {
     { label: t('nav.contact'), href: '/contact' }
   ];
 
-  const handleNavigation = (href: string, title?: string) => {
+  const handleNavigation = (href: string) => {
     if (href.startsWith('/')) {
       navigate(href);
     } else if (href.startsWith('#')) {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
-        if (title) {
-          const titleElement = element.querySelector('h2');
-          if (titleElement) {
-            titleElement.textContent = title;
-          }
-        }
       }
     }
+    setIsMenuOpen(false);
   };
 
   const toggleLanguage = () => {
@@ -72,7 +65,7 @@ const Header = () => {
             {navItems.map((item, index) => (
               <motion.button
                 key={index}
-                onClick={() => handleNavigation(item.href, item.title)}
+                onClick={() => handleNavigation(item.href)}
                 className="text-gray-600 hover:text-gray-900 transition-colors"
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -137,7 +130,7 @@ const Header = () => {
                 {navItems.map((item, index) => (
                   <motion.button
                     key={index}
-                    onClick={() => handleNavigation(item.href, item.title)}
+                    onClick={() => handleNavigation(item.href)}
                     className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md"
                     whileHover={{ x: 4 }}
                   >
@@ -168,6 +161,6 @@ const Header = () => {
       </div>
     </motion.header>
   );
-};
+}
 
 export default Header;

@@ -14,15 +14,7 @@ const transporter = nodemailer.createTransport({
 // Fonction pour envoyer un email de notification
 export const sendNotificationEmail = async (clientEmail: string): Promise<boolean> => {
   try {
-    console.log('Starting email send process...');
-    console.log('Email configuration:', {
-      host: 'smtp.gmail.com',
-      port: 587,
-      user: process.env.EMAIL_USER || 'votre-email@gmail.com'
-    });
-
     // Email envoyé à info@cybernow.io
-    console.log('Sending notification email to info@cybernow.io...');
     await transporter.sendMail({
       from: process.env.EMAIL_USER || 'votre-email@gmail.com',
       to: 'info@cybernow.io',
@@ -34,10 +26,8 @@ export const sendNotificationEmail = async (clientEmail: string): Promise<boolea
         <p>Date d'inscription : ${new Date().toLocaleString('fr-FR')}</p>
       `
     });
-    console.log('Notification email sent successfully');
 
     // Email de confirmation envoyé au client
-    console.log('Sending confirmation email to client...');
     await transporter.sendMail({
       from: process.env.EMAIL_USER || 'votre-email@gmail.com',
       to: clientEmail,
@@ -49,11 +39,9 @@ export const sendNotificationEmail = async (clientEmail: string): Promise<boolea
         <p>L'équipe Conformio</p>
       `
     });
-    console.log('Confirmation email sent successfully');
 
     return true;
   } catch (error) {
-    console.error('Erreur détaillée lors de l\'envoi de l\'email:', error);
     return false;
   }
 }; 

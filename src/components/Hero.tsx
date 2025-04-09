@@ -1,38 +1,27 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { ShieldIcon, FileTextIcon, BoxIcon, ArrowRight } from 'lucide-react';
+import { ShieldIcon, FileTextIcon, BoxIcon } from 'lucide-react';
 import { sendEmail } from '../api/sendEmail';
+
+// Import des images
+import soc2Logo from '/soc2-logo.webp';
+import iso27001Logo from '/iso27001-logo.png';
+import quebecLogo from '/quebec-logo.png';
 
 const StandardBadge = ({
   name,
   icon: Icon,
   description,
   imageSrc,
-  loading = 'lazy',
-  fallbackIcon = false
+  loading = 'lazy'
 }: {
   name: string;
   icon: typeof ShieldIcon;
   description: string;
   imageSrc?: string;
   loading?: 'lazy' | 'eager';
-  fallbackIcon?: boolean;
 }) => {
   const [imageError, setImageError] = useState(false);
-
-  useEffect(() => {
-    if (imageSrc) {
-      console.log(`Loading image for ${name}:`, imageSrc);
-      // Vérifier si l'image existe
-      const img = new Image();
-      img.onload = () => console.log(`Image loaded successfully for ${name}`);
-      img.onerror = () => {
-        console.error(`Failed to load image for ${name}:`, imageSrc);
-        setImageError(true);
-      };
-      img.src = imageSrc;
-    }
-  }, [imageSrc, name]);
 
   return (
     <div className="relative group flex flex-col items-center justify-center h-full">
@@ -64,10 +53,6 @@ export function Hero() {
   const [message, setMessage] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
 
-  const scrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
@@ -81,7 +66,6 @@ export function Hero() {
         : 'Thank you! We have received your request and will contact you as soon as possible.');
       setEmail('');
     } catch (error) {
-      console.error('Error sending email:', error);
       setStatus('error');
       setMessage(language === 'fr'
         ? 'Une erreur est survenue. Veuillez réessayer plus tard.'
@@ -94,56 +78,40 @@ export function Hero() {
       name: 'SOC 2',
       icon: BoxIcon,
       description: 'Standard de sécurité pour les entreprises technologiques',
-      imageSrc: "/soc2-logo.webp",
-      loading: 'eager' as const,
-      fallbackIcon: false
+      imageSrc: soc2Logo,
+      loading: 'eager' as const
     },
     {
       name: 'ISO 27001',
       icon: BoxIcon,
       description: 'Standard international',
-      imageSrc: "/iso27001-logo.png",
-      loading: 'eager' as const,
-      fallbackIcon: false
+      imageSrc: iso27001Logo,
+      loading: 'eager' as const
     },
     {
       name: 'Loi 25',
       icon: FileTextIcon,
       description: 'Loi sur la protection des renseignements personnels',
-      imageSrc: "/quebec-logo.png",
-      loading: 'eager' as const,
-      fallbackIcon: false
+      imageSrc: quebecLogo,
+      loading: 'eager' as const
     },
     {
       name: 'TGV',
       icon: ShieldIcon,
       description: 'Norme gouvernementale',
-      imageSrc: "/quebec-logo.png",
-      loading: 'eager' as const,
-      fallbackIcon: false
+      imageSrc: quebecLogo,
+      loading: 'eager' as const
     }
   ];
 
   return (
-    <section 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-bg to-bg-soft py-16 md:py-32" 
-      aria-labelledby="hero-title"
-      itemScope 
-      itemType="https://schema.org/WebPage"
-    >
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-bg to-bg-soft py-16 md:py-32">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 
-            id="hero-title" 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-6"
-            itemProp="headline"
-          >
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-6">
             {t('hero.title')}
           </h1>
-          <p 
-            className="text-xl md:text-2xl text-text/80 mb-12"
-            itemProp="description"
-          >
+          <p className="text-xl md:text-2xl text-text/80 mb-12">
             {t('hero.subtitle')}
           </p>
           
@@ -153,8 +121,6 @@ export function Hero() {
               onSubmit={handleSubmit} 
               className="w-full max-w-lg" 
               aria-label="Formulaire d'inscription"
-              itemScope 
-              itemType="https://schema.org/ContactPage"
             >
               <div className="flex flex-col gap-4">
                 <div className="flex gap-4">
@@ -167,13 +133,11 @@ export function Hero() {
                     required
                     aria-label={t('hero.emailPlaceholder')}
                     aria-required="true"
-                    itemProp="email"
                   />
                   <button
                     type="submit"
                     className="px-6 py-3 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
                     aria-label="Parlez-Nous"
-                    itemProp="potentialAction"
                     disabled={status === 'loading'}
                   >
                     {status === 'loading' ? (
@@ -211,27 +175,11 @@ export function Hero() {
                 description={standard.description}
                 imageSrc={standard.imageSrc}
                 loading={standard.loading}
-                fallbackIcon={standard.fallbackIcon}
               />
             ))}
           </div>
         </div>
       </div>
-      
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "name": t('hero.title'),
-          "description": t('hero.subtitle'),
-          "inLanguage": language === 'fr' ? "fr-CA" : "en-CA",
-          "isPartOf": {
-            "@type": "WebSite",
-            "name": "Conformio",
-            "url": "https://conformio.ca"
-          }
-        })}
-      </script>
     </section>
   );
 }

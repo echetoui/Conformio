@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const TermsOfService = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
 
   return (
     <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
