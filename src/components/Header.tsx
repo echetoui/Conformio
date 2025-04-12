@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Menu, X, Gift } from 'lucide-react';
+import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
