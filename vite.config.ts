@@ -4,7 +4,7 @@ import compression from 'vite-plugin-compression2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.VERCEL ? '/' : '/Landing-Page-SaaS-Cybers-curit-Moderne/',
+  base: '/Landing-Page-SaaS-Cybers-curit-Moderne/',
   plugins: [
     react(),
     // Gzip compression
@@ -62,19 +62,11 @@ export default defineConfig({
     },
     port: 3000,
     host: true,
-    open: true
-  },
-  _server: {
+    open: true,
     hmr: {
       clientPort: 443,
       path: '/Landing-Page-SaaS-Cybers-curit-Moderne/'
-    },
-  },
-  get server() {
-    return this._server
-  },
-  set server(value) {
-    this._server = value
+    }
   },
   preview: {
     port: 3000,
