@@ -10,6 +10,9 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
+  checks: write
+  deployments: write
 
 concurrency:
   group: "pages"
@@ -19,25 +22,44 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Clear GitHub Actions cache
+        uses: actions/cache/cleanup@v1
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+            node_modules
+          key: ${{ runner.os }}-build-${{ github.sha }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          clean: true
 
       - name: Clean previous build
-        run: rm -rf dist
+        run: |
+          rm -rf dist
+          rm -rf node_modules
+          rm -rf .npm
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: "20"
           cache: 'npm'
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm cache clean --force
 
       - name: Build
         run: npm run build
         env:
           BASE_URL: '/Landing-Page-SaaS-Cybers-curit-Moderne/'
+          NODE_ENV: 'production'
 
       - name: Debug Build Output
         run: |
@@ -54,15 +76,22 @@ jobs:
             echo "Error: dist/index.html not found"
             exit 1
           fi
+          if [ ! -d "dist/assets" ]; then
+            echo "Error: dist/assets directory not found"
+            exit 1
+          fi
           echo "Build output verified successfully"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v3
+        with:
+          enable-jekyll: false
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v2
         with:
           path: './dist'
+          retention-days: 1
 
   deploy:
     environment:
@@ -72,7 +101,7 @@ jobs:
     needs: build
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: github-pages
           path: './dist'
@@ -88,8 +117,12 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
-          folder: dist 
+          folder: dist
+          clean: true
+          clean-exclude: |
+            CNAME
+            .nojekyll 
