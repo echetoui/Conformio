@@ -64,6 +64,18 @@ export default defineConfig({
     host: true,
     open: true
   },
+  _server: {
+    hmr: {
+      clientPort: 443,
+      path: '/Landing-Page-SaaS-Cybers-curit-Moderne/'
+    },
+  },
+  get server() {
+    return this._server
+  },
+  set server(value) {
+    this._server = value
+  },
   preview: {
     port: 3000,
     open: true
