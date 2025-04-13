@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -21,6 +22,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Clean previous build
+        run: rm -rf dist
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -35,6 +39,15 @@ jobs:
         env:
           BASE_URL: '/Landing-Page-SaaS-Cybers-curit-Moderne/'
 
+      - name: Debug Build Output
+        run: |
+          echo "Contents of dist directory:"
+          ls -la dist/
+          echo "Total size:"
+          du -sh dist/
+          echo "Checking for symlinks:"
+          find dist -type l -ls
+
       - name: Verify build output
         run: |
           if [ ! -f "dist/index.html" ]; then
@@ -47,9 +60,8 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v4
         with:
-          name: github-pages
           path: './dist'
 
   deploy:
@@ -65,6 +77,19 @@ jobs:
           name: github-pages
           path: './dist'
 
+      - name: Debug Artifact Contents
+        run: |
+          echo "Contents of downloaded artifact:"
+          ls -la dist/
+          echo "Total size:"
+          du -sh dist/
+          echo "Checking for symlinks:"
+          find dist -type l -ls
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: dist 
