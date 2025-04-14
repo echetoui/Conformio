@@ -4,7 +4,7 @@ import compression from 'vite-plugin-compression2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/Conformio/',
   plugins: [
     react(),
     // Gzip compression
@@ -61,11 +61,7 @@ export default defineConfig({
       localsConvention: 'camelCase',
       scopeBehaviour: 'local',
     },
-    preprocessorOptions: {
-      postcss: {
-        plugins: [require('tailwindcss'), require('autoprefixer')],
-      },
-    },
+    devSourcemap: true,
   },
   server: {
     headers: {
