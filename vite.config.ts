@@ -4,7 +4,7 @@ import compression from 'vite-plugin-compression2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/Conformio/',
+  base: './',
   plugins: [
     react(),
     // Gzip compression
@@ -56,17 +56,24 @@ export default defineConfig({
     sourcemap: true,
     reportCompressedSize: true
   },
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
+      scopeBehaviour: 'local',
+    },
+    preprocessorOptions: {
+      postcss: {
+        plugins: [require('tailwindcss'), require('autoprefixer')],
+      },
+    },
+  },
   server: {
     headers: {
-      'Cache-Control': 'public, max-age=31536000, immutable',
+      'Cache-Control': 'no-store',
     },
     port: 3000,
     host: true,
     open: true,
-    hmr: {
-      clientPort: 443,
-      path: '/Conformio/'
-    }
   },
   preview: {
     port: 3000,
