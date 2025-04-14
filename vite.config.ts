@@ -4,7 +4,7 @@ import compression from 'vite-plugin-compression2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/Landing-Page-SaaS-Cybers-curit-Moderne/',
+  base: '/Conformio/',
   plugins: [
     react(),
     // Gzip compression
@@ -65,7 +65,7 @@ export default defineConfig({
     open: true,
     hmr: {
       clientPort: 443,
-      path: '/Landing-Page-SaaS-Cybers-curit-Moderne/'
+      path: '/Conformio/'
     }
   },
   preview: {
