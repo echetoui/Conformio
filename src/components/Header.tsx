@@ -10,8 +10,7 @@ export function Header() {
   const navigate = useNavigate();
 
   const startFreeTrial = () => {
-    // Redirection directe vers le site CRIM
-    window.location.href = 'https://activationia.crim.ca/';
+    window.open('https://cal.com/elyes-chetoui-tf93vx/30min', '_blank', 'noopener,noreferrer');
   };
 
   const navItems = [
