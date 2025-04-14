@@ -10,26 +10,8 @@ export function Header() {
   const navigate = useNavigate();
 
   const startFreeTrial = () => {
-    const width = Math.min(1024, window.screen.width);
-    const height = Math.min(768, window.screen.height);
-    const left = (window.screen.width - width) / 2;
-    const top = (window.screen.height - height) / 2;
-    const features = [
-      `width=${width}`,
-      `height=${height}`,
-      `top=${top}`,
-      `left=${left}`,
-      'menubar=yes',
-      'toolbar=yes',
-      'location=yes',
-      'status=yes',
-      'resizable=yes',
-      'scrollbars=yes',
-      'noopener=yes',
-      'noreferrer=yes'
-    ].join(',');
-    
-    window.open('https://cal.com/elyes-chetoui-tf93vx/30min', '', features);
+    // Redirection directe vers le site CRIM
+    window.location.href = 'https://activationia.crim.ca/';
   };
 
   const navItems = [
