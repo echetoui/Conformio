@@ -62,6 +62,18 @@ export default defineConfig({
       scopeBehaviour: 'local',
     },
     devSourcemap: true,
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/styles/variables.scss";`
+      }
+    }
+  },
+  resolve: {
+    alias: {
+      '@': '/src',
+      '@components': '/src/components',
+      '@styles': '/src/styles'
+    }
   },
   server: {
     headers: {
