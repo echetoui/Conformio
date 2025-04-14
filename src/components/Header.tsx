@@ -1,4 +1,4 @@
-import { Menu, X, Gift } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,11 +9,27 @@ export function Header() {
   const { language, setLanguage, t } = useLanguage();
   const navigate = useNavigate();
 
-  const scrollToForm = () => {
-    const form = document.querySelector('form');
-    if (form) {
-      form.scrollIntoView({ behavior: 'smooth' });
-    }
+  const startFreeTrial = () => {
+    const width = Math.min(1024, window.screen.width);
+    const height = Math.min(768, window.screen.height);
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+    const features = [
+      `width=${width}`,
+      `height=${height}`,
+      `top=${top}`,
+      `left=${left}`,
+      'menubar=yes',
+      'toolbar=yes',
+      'location=yes',
+      'status=yes',
+      'resizable=yes',
+      'scrollbars=yes',
+      'noopener=yes',
+      'noreferrer=yes'
+    ].join(',');
+    
+    window.open('https://cal.com/elyes-chetoui-tf93vx/30min', '', features);
   };
 
   const navItems = [
@@ -78,13 +94,12 @@ export function Header() {
           {/* Actions desktop */}
           <div className="hidden md:flex items-center gap-4">
             <motion.button
-              onClick={scrollToForm}
+              onClick={startFreeTrial}
               className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Gift className="w-4 h-4" />
-              {language === 'fr' ? 'Commencer l\'essai gratuit' : 'Start free trial'}
+              {language === 'fr' ? '🎁 Commencer l\'essai gratuit' : '🎁 Start free trial'}
             </motion.button>
             <motion.button
               onClick={toggleLanguage}
@@ -138,13 +153,12 @@ export function Header() {
                   </motion.button>
                 ))}
                 <motion.button
-                  onClick={scrollToForm}
+                  onClick={startFreeTrial}
                   className="w-full mt-4 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Gift className="w-4 h-4" />
-                  {language === 'fr' ? 'Commencer l\'essai gratuit' : 'Start free trial'}
+                  {language === 'fr' ? '🎁 Commencer l\'essai gratuit' : '🎁 Start free trial'}
                 </motion.button>
                 <motion.button
                   onClick={toggleLanguage}
@@ -162,5 +176,3 @@ export function Header() {
     </motion.header>
   );
 }
-
-export default Header;
