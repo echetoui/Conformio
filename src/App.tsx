@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Hero from './components/Hero';
-import Header from './components/Header';
+import { Header } from './components/Header';
 import CookieConsent from './components/CookieConsent';
 import { LanguageProvider } from './context/LanguageContext';
 

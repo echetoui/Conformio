@@ -216,7 +216,7 @@ function TrialForm() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="objectives" className="block text-sm font-medium text-gray-700 mb-1">
               {language === 'fr' ? 'Objectifs de conformité' : 'Compliance Objectives'}
             </label>
             <Controller
@@ -224,19 +224,20 @@ function TrialForm() {
               control={control}
               render={({ field }) => (
                 <div className="space-y-2">
-                  {objectiveOptions[language].map(option => (
+                  {objectiveOptions[language as keyof typeof objectiveOptions].map((option) => (
                     <label key={option.value} className="flex items-center">
                       <input
                         type="checkbox"
-                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                         value={option.value}
                         checked={field.value.includes(option.value)}
                         onChange={(e) => {
-                          const newValue = e.target.checked
-                            ? [...field.value, option.value]
-                            : field.value.filter((v) => v !== option.value);
-                          field.onChange(newValue);
+                          const value = option.value;
+                          const newValues = e.target.checked
+                            ? [...field.value, value]
+                            : field.value.filter((v: string) => v !== value);
+                          field.onChange(newValues);
                         }}
+                        className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                       />
                       <span className="ml-2 text-gray-700">{option.label}</span>
                     </label>
@@ -249,20 +250,19 @@ function TrialForm() {
             )}
           </div>
 
-          {error && (
-            <p className="text-sm text-red-600 text-center">{error}</p>
-          )}
-
           <button
             type="submit"
             disabled={isSubmitting}
             className="w-full px-6 py-3 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            aria-label={language === 'fr' ? 'Commencer l\'essai gratuit' : 'Start free trial'}
           >
-            {isSubmitting 
-              ? (language === 'fr' ? 'Envoi en cours...' : 'Sending...') 
+            {isSubmitting
+              ? (language === 'fr' ? 'Envoi en cours...' : 'Sending...')
               : (language === 'fr' ? '🎁 Commencer l\'essai gratuit' : '🎁 Start free trial')}
           </button>
+
+          {error && (
+            <p className="mt-2 text-sm text-red-600 text-center">{error}</p>
+          )}
         </motion.form>
       </div>
     </section>
