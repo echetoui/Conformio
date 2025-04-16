@@ -10,7 +10,7 @@ export function Header() {
   const navigate = useNavigate();
 
   const startFreeTrial = () => {
-    window.open('https://cal.com/elyes-chetoui-tf93vx/30min', '_blank', 'noopener,noreferrer');
+    window.open('https://cal.com/conformio', '_blank', 'noopener,noreferrer');
   };
 
   const navItems = [

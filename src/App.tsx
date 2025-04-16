@@ -47,7 +47,7 @@ const HomePage = () => (
 const ContactRedirect = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      window.location.href = 'https://cal.com/elyes-chetoui-tf93vx/30min';
+      window.location.href = 'https://cal.com/conformio';
     }, 100);
     
     return () => clearTimeout(timer);
@@ -60,7 +60,7 @@ const ContactRedirect = () => {
         <p className="text-gray-600">
           Si vous n'êtes pas redirigé automatiquement,{' '}
           <a 
-            href="https://cal.com/elyes-chetoui-tf93vx/30min"
+            href="https://cal.com/conformio"
             className="text-blue-600 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
