@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { CheckCircle } from 'lucide-react';
+import { addLeadToNotion } from '../lib/notion';
 
 // Schéma de validation Zod
 const getValidationMessages = (language: string) => ({
@@ -85,14 +86,8 @@ function TrialForm() {
     setError('');
 
     try {
-      const response = await fetch('/api/send-to-airtable', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      if (!response.ok) throw new Error('Erreur lors de l\'envoi du formulaire');
-
+      // Envoyer les données à Notion
+      await addLeadToNotion(data);
       setIsSuccess(true);
     } catch (err) {
       setError('Une erreur est survenue. Veuillez réessayer.');

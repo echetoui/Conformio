@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { ShieldIcon, FileTextIcon, BoxIcon } from 'lucide-react';
-import { sendEmail } from '../api/sendEmail';
+import { useNavigate } from 'react-router-dom';
+import { useForm, ValidationError } from '@formspree/react';
 
 // Import des images
 import soc2Logo from '/soc2-logo.webp';
@@ -48,30 +49,10 @@ const StandardBadge = ({
 
 export function Hero() {
   const { t, language } = useLanguage();
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [message, setMessage] = useState('');
-  const formRef = useRef<HTMLFormElement>(null);
+  const [state, handleSubmit] = useForm("xrbpvpod");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-    setMessage('');
-    
-    try {
-      await sendEmail(email);
-      setStatus('success');
-      setMessage(language === 'fr' 
-        ? 'Merci ! Nous avons bien reçu votre demande et nous vous contacterons dans les plus brefs délais.'
-        : 'Thank you! We have received your request and will contact you as soon as possible.');
-      setEmail('');
-    } catch (error) {
-      setStatus('error');
-      setMessage(language === 'fr'
-        ? 'Une erreur est survenue. Veuillez réessayer plus tard.'
-        : 'An error occurred. Please try again later.');
-    }
-  };
+  // Debug log
+  console.log('Form state:', state);
 
   const standards = [
     {
@@ -115,56 +96,44 @@ export function Hero() {
             {t('hero.subtitle')}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <form 
-              ref={formRef}
-              onSubmit={handleSubmit} 
-              className="w-full max-w-lg" 
-              aria-label="Formulaire d'inscription"
-            >
-              <div className="flex flex-col gap-4">
-                <div className="flex gap-4">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t('hero.emailPlaceholder')}
-                    className="flex-1 px-6 py-3 rounded-lg bg-bg/80 backdrop-blur-sm border border-primary/10 text-text placeholder-text/50 focus:outline-none focus:ring-2 focus:ring-primary"
-                    required
-                    aria-label={t('hero.emailPlaceholder')}
-                    aria-required="true"
-                  />
-                  <button
-                    type="submit"
-                    className="px-6 py-3 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
-                    aria-label="Parlez-Nous"
-                    disabled={status === 'loading'}
-                  >
-                    {status === 'loading' ? (
-                      <span className="flex items-center">
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        {language === 'fr' ? 'Envoi en cours...' : 'Sending...'}
-                      </span>
-                    ) : (
-                      '🚀 Parlez-Nous'
-                    )}
-                  </button>
-                </div>
+          {state.succeeded ? (
+            <div className="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <p className="text-green-600 font-medium">
+                {language === 'fr' 
+                  ? "Génial ! Votre message nous est bien parvenu. On vous envoie bientôt des nouvelles !" 
+                  : "Great! Your message has been received. We'll be in touch soon!"}
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+              <div className="flex-1 min-w-0">
+                <label htmlFor="email" className="sr-only">
+                  {language === 'fr' ? "Votre adresse email" : "Your email address"}
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder={language === 'fr' ? "Votre adresse email" : "Your email address"}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+                <ValidationError 
+                  prefix="Email" 
+                  field="email"
+                  errors={state.errors}
+                  className="text-red-500 text-sm mt-1"
+                />
               </div>
-              {message && (
-                <p 
-                  className={`mt-2 ${status === 'success' ? 'text-green-400' : 'text-red-400'}`} 
-                  role="status"
-                  aria-live="polite"
-                >
-                  {message}
-                </p>
-              )}
+              <button
+                type="submit"
+                disabled={state.submitting}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                🚀 {language === 'fr' ? "Parlez-Nous" : "Talk to Us"}
+              </button>
             </form>
-          </div>
+          )}
           
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
             {standards.map((standard, index) => (
