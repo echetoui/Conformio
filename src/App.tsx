@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { trackPageView } from './services/analyticsService';
 import Hero from './components/Hero';
 import { Header } from './components/Header';
 import CookieConsent from './components/CookieConsent';
@@ -74,6 +75,12 @@ const ContactRedirect = () => {
 };
 
 export function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location]);
+
   return (
     <LanguageProvider>
       <div className="min-h-screen bg-white font-sans selection:bg-blue-100 selection:text-blue-900">
