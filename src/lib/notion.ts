@@ -1,8 +1,20 @@
 import { Client } from '@notionhq/client';
 
-const notion = new Client({
-  auth: process.env.NOTION_API_KEY,
-});
+// Créer un client Notion uniquement si la clé API est disponible
+// Cela évite l'erreur dans le navigateur
+let notion: Client | null = null;
+
+// Vérifier si nous sommes dans un environnement où les variables d'environnement sont disponibles
+try {
+  const apiKey = import.meta.env.VITE_NOTION_API_KEY;
+  if (apiKey) {
+    notion = new Client({
+      auth: apiKey,
+    });
+  }
+} catch (error) {
+  console.warn('Notion API key not available in this environment');
+}
 
 export async function addLeadToNotion(data: {
   fullName: string;
@@ -13,9 +25,15 @@ export async function addLeadToNotion(data: {
   utmSource?: string;
 }) {
   try {
+    // Vérifier si le client Notion est disponible
+    if (!notion) {
+      console.error('Notion client not initialized');
+      return { success: false, error: 'Notion API not available' };
+    }
+    
     const response = await notion.pages.create({
       parent: {
-        database_id: process.env.NOTION_DATABASE_ID || '',
+        database_id: import.meta.env.VITE_NOTION_DATABASE_ID || '',
       },
       properties: {
         Name: {

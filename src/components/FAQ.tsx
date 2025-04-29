@@ -69,7 +69,7 @@ const FAQ = () => {
     <section 
       ref={sectionRef}
       className="py-24 bg-white"
-      id="faq"
+      id="about"
     >
       <div className="max-w-4xl mx-auto px-6">
         <motion.div

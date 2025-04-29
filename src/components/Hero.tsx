@@ -86,13 +86,13 @@ export function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-bg to-bg-soft py-16 md:py-32">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-bg to-bg-soft py-12 md:py-32">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-6">
+        <div className="max-w-4xl mx-auto text-center pt-8 md:pt-0">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4 md:mb-6">
             {t('hero.title')}
           </h1>
-          <p className="text-xl md:text-2xl text-text/80 mb-12">
+          <p className="text-lg sm:text-xl md:text-2xl text-text/80 mb-8 md:mb-12">
             {t('hero.subtitle')}
           </p>
           
@@ -135,7 +135,7 @@ export function Hero() {
             </form>
           )}
           
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="mt-10 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {standards.map((standard, index) => (
               <StandardBadge
                 key={index}

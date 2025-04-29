@@ -59,6 +59,10 @@ export const en = {
     step3: {
       title: 'Track your progress',
       description: 'Visualize your posture in real-time and collaborate with your team.'
+    },
+    step4: {
+      title: 'Real-time monitoring',
+      description: 'Live status, alerts, assigned tasks: always ready for audit.'
     }
   },
 

@@ -24,6 +24,17 @@ function TrialForm() {
 
   const validationMessages = getValidationMessages(language);
 
+  // Définir les valeurs d'objectifs comme constantes pour assurer la cohérence des types
+  const OBJECTIVES = {
+    LOI_25: 'Loi 25',
+    SOC_2: 'SOC 2',
+    TGV: 'TGV',
+    ISO_27001: 'ISO 27001'
+  } as const;
+  
+  // Créer un type à partir des valeurs d'objectifs
+  type ObjectiveValue = typeof OBJECTIVES[keyof typeof OBJECTIVES];
+  
   const trialFormSchema = z.object({
     fullName: z.string().min(2, validationMessages.fullName),
     email: z.string().email(validationMessages.email).refine(
@@ -32,7 +43,7 @@ function TrialForm() {
     ),
     companyName: z.string().min(2, validationMessages.companyName),
     teamSize: z.enum(['1-5', '6-20', '21-50', '50+']),
-    objectives: z.array(z.enum(['Loi 25', 'SOC 2', 'TGV', 'ISO 27001'])).min(1, validationMessages.objectives),
+    objectives: z.array(z.enum([OBJECTIVES.LOI_25, OBJECTIVES.SOC_2, OBJECTIVES.TGV, OBJECTIVES.ISO_27001])).min(1, validationMessages.objectives),
     utmSource: z.string().optional()
   });
 
@@ -55,16 +66,16 @@ function TrialForm() {
 
   const objectiveOptions = {
     fr: [
-      { value: 'Loi 25', label: 'Loi 25' },
-      { value: 'SOC 2', label: 'SOC 2' },
-      { value: 'ISO 27001', label: 'ISO 27001' },
-      { value: 'TGV', label: 'TGV (Trousse globale de vérification)' }
+      { value: OBJECTIVES.LOI_25, label: 'Loi 25' },
+      { value: OBJECTIVES.SOC_2, label: 'SOC 2' },
+      { value: OBJECTIVES.ISO_27001, label: 'ISO 27001' },
+      { value: OBJECTIVES.TGV, label: 'TGV (Trousse globale de vérification)' }
     ],
     en: [
-      { value: 'Loi 25', label: 'Bill 25' },
-      { value: 'SOC 2', label: 'SOC 2' },
-      { value: 'ISO 27001', label: 'ISO 27001' },
-      { value: 'TGV', label: 'TGV (Global Verification Toolkit)' }
+      { value: OBJECTIVES.LOI_25, label: 'Bill 25' },
+      { value: OBJECTIVES.SOC_2, label: 'SOC 2' },
+      { value: OBJECTIVES.ISO_27001, label: 'ISO 27001' },
+      { value: OBJECTIVES.TGV, label: 'TGV (Global Verification Toolkit)' }
     ]
   };
 
@@ -117,7 +128,7 @@ function TrialForm() {
   }
 
   return (
-    <section className="py-16 bg-white" id="essai-gratuit">
+    <section className="py-16 bg-white" id="trial">
       <div className="max-w-xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -211,9 +222,9 @@ function TrialForm() {
           </div>
 
           <div>
-            <label htmlFor="objectives" className="block text-sm font-medium text-gray-700 mb-1">
+            <div className="block text-sm font-medium text-gray-700 mb-1">
               {language === 'fr' ? 'Objectifs de conformité' : 'Compliance Objectives'}
-            </label>
+            </div>
             <Controller
               name="objectives"
               control={control}
@@ -223,13 +234,15 @@ function TrialForm() {
                     <label key={option.value} className="flex items-center">
                       <input
                         type="checkbox"
+                        id={`objective-${option.value}`}
                         value={option.value}
                         checked={field.value.includes(option.value)}
                         onChange={(e) => {
+                          // La valeur est maintenant correctement typée grâce à notre constante OBJECTIVES
                           const value = option.value;
                           const newValues = e.target.checked
                             ? [...field.value, value]
-                            : field.value.filter((v: string) => v !== value);
+                            : field.value.filter((v: ObjectiveValue) => v !== value);
                           field.onChange(newValues);
                         }}
                         className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"

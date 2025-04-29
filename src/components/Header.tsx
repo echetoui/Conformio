@@ -1,3 +1,4 @@
+import React from 'react';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
@@ -14,10 +15,10 @@ export function Header() {
   };
 
   const navItems = [
-    { label: t('nav.features'), href: '#features', title: 'Pourquoi choisir notre solution ?' },
-    { label: t('nav.benefits'), href: '#benefits', title: 'Conformité automatisée, en 4 étapes simples' },
+    { label: t('nav.features'), href: '#features', title: 'Conformité automatisée, en 4 étapes simples' },
+    { label: t('nav.benefits'), href: '#benefits', title: 'Pourquoi choisir notre solution ?' },
     { label: t('nav.about'), href: '#about', title: 'Questions fréquentes' },
-    { label: t('nav.contact'), href: '/contact' }
+    { label: t('nav.contact'), href: '#trial', title: 'Commencez votre essai gratuit' }
   ];
 
   const handleNavigation = (href: string) => {
@@ -43,7 +44,7 @@ export function Header() {
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <div className="h-20 px-6 md:px-10 mx-auto max-w-7xl">
+      <div className="h-20 px-4 sm:px-6 md:px-10 mx-auto max-w-7xl">
         <div className="flex items-center justify-between h-full">
           {/* Logo */}
           <motion.button 
@@ -119,10 +120,10 @@ export function Header() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden"
+              className="md:hidden absolute top-20 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50"
               id="mobile-menu"
             >
-              <div className="px-2 pt-2 pb-3 space-y-1">
+              <div className="px-4 pt-2 pb-3 space-y-1">
                 {navItems.map((item, index) => (
                   <motion.button
                     key={index}

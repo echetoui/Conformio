@@ -1,33 +1,30 @@
-import mixpanel from 'mixpanel-browser';
+// Service d'analytique désactivé pour résoudre le problème de page blanche
 
-// Initialize Mixpanel with your project token
-mixpanel.init('e8adece1191e583f82c254f783f852c0', {
-  debug: process.env.NODE_ENV === 'development',
-  track_pageview: true,
-  persistence: 'localStorage',
-});
-
+// Fonctions vides qui ne font rien pour éviter les erreurs
 export const trackEvent = (eventName: string, properties: Record<string, any> = {}) => {
-  mixpanel.track(eventName, {
-    ...properties,
-    timestamp: new Date().toISOString(),
-  });
+  // Désactivé - remplacé par console.log en développement
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[Analytics]', eventName, properties);
+  }
 };
 
 export const identifyUser = (userId: string, userProperties: Record<string, any> = {}) => {
-  mixpanel.identify(userId);
-  if (Object.keys(userProperties).length > 0) {
-    mixpanel.people.set(userProperties);
+  // Désactivé
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[Analytics] Identify User', userId, userProperties);
   }
 };
 
 export const trackPageView = (pageName: string, properties: Record<string, any> = {}) => {
-  trackEvent('Page View', {
-    page: pageName,
-    ...properties,
-  });
+  // Désactivé
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[Analytics] Page View', pageName, properties);
+  }
 };
 
 export const resetUser = () => {
-  mixpanel.reset();
+  // Désactivé
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[Analytics] Reset User');
+  }
 };

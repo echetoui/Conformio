@@ -71,7 +71,7 @@ function Footer() {
 
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-center text-sm text-gray-500">
-            © {new Date().getFullYear()} Conformio. {t('footer.rights')}
+            {t('footer.copyright').replace('2024', new Date().getFullYear().toString())}
           </p>
         </div>
       </div>
