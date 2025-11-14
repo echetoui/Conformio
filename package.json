@@ -21,7 +21,7 @@
     "dotenv": "^16.5.0",
     "escape-html": "^1.0.3",
     "express": "^5.1.0",
-    "framer-motion": "^12.6.3",
+    "framer-motion": "^12.23.24",
     "lucide-react": "^0.441.0",
     "mixpanel-browser": "^2.64.0",
     "nodemailer": "^6.10.0",
