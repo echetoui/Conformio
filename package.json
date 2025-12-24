@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
-    "@hookform/resolvers": "^5.0.1",
+    "@hookform/resolvers": "^5.2.2",
     "@notionhq/client": "^2.3.0",
     "airtable": "^0.12.2",
     "cors": "^2.8.5",
