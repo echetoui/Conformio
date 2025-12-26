@@ -18,7 +18,7 @@
     "@notionhq/client": "^2.3.0",
     "airtable": "^0.12.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
+    "dotenv": "^16.6.1",
     "escape-html": "^1.0.3",
     "express": "^5.1.0",
     "framer-motion": "^12.6.3",
