@@ -1,22 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import compression from 'vite-plugin-compression2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
   plugins: [
     react(),
-    // Gzip compression
-    compression({
-      algorithm: 'gzip',
-      exclude: [/\.(br)$/, /\.(gz)$/],
-    }),
-    // Brotli compression
-    compression({
-      algorithm: 'brotliCompress',
-      exclude: [/\.(br)$/, /\.(gz)$/],
-    }),
+    // Note: Compression is disabled as Vercel handles it server-side
+    // with proper MIME type headers. Enabling compression here can cause
+    // MIME type issues in production where .gz/.br files are served with
+    // incorrect Content-Type headers.
+    // Vercel's automatic compression provides better compatibility.
   ],
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lucide-react'],
