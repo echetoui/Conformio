@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { CheckCircle } from 'lucide-react';
+import { submitTrialForm } from '../api/submitTrialForm';
 
 // Schéma de validation Zod
 const getValidationMessages = (language: string) => ({
@@ -96,22 +97,15 @@ function TrialForm() {
     setError('');
 
     try {
-      // Envoyer les données du formulaire par email via le backend
-      const response = await fetch('/api/submit-trial-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      // Envoyer les données du formulaire via Formspree
+      const result = await submitTrialForm(data);
 
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
+      if (!result.success) {
         setError(
-          language === 'fr'
+          result.error ||
+          (language === 'fr'
             ? 'Une erreur est survenue. Veuillez réessayer.'
-            : 'An error occurred. Please try again.'
+            : 'An error occurred. Please try again.')
         );
         return;
       }
