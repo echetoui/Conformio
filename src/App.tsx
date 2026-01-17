@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import { Header } from './components/Header';
 import CookieConsent from './components/CookieConsent';
 import { LanguageProvider } from './context/LanguageContext';
+import { PageHelmet } from './components/PageHelmet';
 
 const Benefits = lazy(() => import('./components/Benefits'));
 const Features = lazy(() => import('./components/Features'));
@@ -22,6 +23,7 @@ const SectionLoader = () => (
 
 const HomePage = () => (
   <>
+    <PageHelmet metaKey="home" />
     <Header />
     <main>
       <Hero />

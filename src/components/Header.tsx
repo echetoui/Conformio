@@ -61,15 +61,19 @@ export function Header() {
           {/* Navigation desktop */}
           <nav className="hidden md:flex items-center gap-8" aria-label="Menu principal">
             {navItems.map((item, index) => (
-              <motion.button
+              <motion.a
                 key={index}
-                onClick={() => handleNavigation(item.href)}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation(item.href);
+                }}
                 className="text-gray-600 hover:text-gray-900 transition-colors"
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
                 {item.label}
-              </motion.button>
+              </motion.a>
             ))}
           </nav>
 
@@ -125,14 +129,18 @@ export function Header() {
             >
               <div className="px-4 pt-2 pb-3 space-y-1">
                 {navItems.map((item, index) => (
-                  <motion.button
+                  <motion.a
                     key={index}
-                    onClick={() => handleNavigation(item.href)}
-                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavigation(item.href);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md"
                     whileHover={{ x: 4 }}
                   >
                     {item.label}
-                  </motion.button>
+                  </motion.a>
                 ))}
                 <motion.button
                   onClick={startFreeTrial}

@@ -1,4 +1,20 @@
 export const en = {
+  // Meta Tags (SEO)
+  meta: {
+    home: {
+      title: 'Conformio - Compliance Management Platform for SaaS',
+      description: 'Simplify your compliance with Conformio. Manage SOC 2, ISO 27001, and TGV standards from a single platform. Automated evidence collection and real-time monitoring.'
+    },
+    privacy: {
+      title: 'Privacy Policy - Conformio',
+      description: 'Learn how Conformio collects, uses, and protects your data.'
+    },
+    terms: {
+      title: 'Terms of Service - Conformio',
+      description: 'Review the terms and conditions for using Conformio.'
+    }
+  },
+
   // Navigation
   nav: {
     features: 'Features',

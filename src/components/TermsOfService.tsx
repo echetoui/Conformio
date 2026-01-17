@@ -1,11 +1,14 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { PageHelmet } from './PageHelmet';
 
 const TermsOfService = () => {
   const { language } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <>
+      <PageHelmet metaKey="terms" />
+      <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
           {language === 'fr' ? 'Conditions d\'Utilisation' : 'Terms of Service'}
@@ -85,6 +88,7 @@ const TermsOfService = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

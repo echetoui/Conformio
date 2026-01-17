@@ -9,10 +9,10 @@ export default {content: [
           DEFAULT: "#2563EB",
           dark: "#1E40AF",
         },
-        secondary: "#0EA5E9",
+        secondary: "#0369A1",
         text: {
           DEFAULT: "#1F2937",
-          soft: "#6B7280",
+          soft: "#4B5563",
         },
         bg: {
           DEFAULT: "#FFFFFF",

@@ -175,12 +175,15 @@ function TrialForm() {
             <input
               type="text"
               id="fullName"
+              autoComplete="name"
+              aria-invalid={!!errors.fullName}
+              aria-describedby={errors.fullName ? "fullName-error" : undefined}
               {...register('fullName')}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Jean Dupont"
             />
             {errors.fullName && (
-              <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
+              <p id="fullName-error" className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
             )}
           </div>
 
@@ -191,12 +194,15 @@ function TrialForm() {
             <input
               type="email"
               id="email"
+              autoComplete="email"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? "email-error" : undefined}
               {...register('email')}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="jean@entreprise.com"
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+              <p id="email-error" className="mt-1 text-sm text-red-600">{errors.email.message}</p>
             )}
           </div>
 
@@ -207,12 +213,15 @@ function TrialForm() {
             <input
               type="text"
               id="companyName"
+              autoComplete="organization"
+              aria-invalid={!!errors.companyName}
+              aria-describedby={errors.companyName ? "companyName-error" : undefined}
               {...register('companyName')}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Entreprise Inc."
             />
             {errors.companyName && (
-              <p className="mt-1 text-sm text-red-600">{errors.companyName.message}</p>
+              <p id="companyName-error" className="mt-1 text-sm text-red-600">{errors.companyName.message}</p>
             )}
           </div>
 
@@ -222,6 +231,8 @@ function TrialForm() {
             </label>
             <select
               id="teamSize"
+              aria-invalid={!!errors.teamSize}
+              aria-describedby={errors.teamSize ? "teamSize-error" : undefined}
               {...register('teamSize')}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
@@ -233,14 +244,15 @@ function TrialForm() {
               ))}
             </select>
             {errors.teamSize && (
-              <p className="mt-1 text-sm text-red-600">{errors.teamSize.message}</p>
+              <p id="teamSize-error" className="mt-1 text-sm text-red-600">{errors.teamSize.message}</p>
             )}
           </div>
 
           <div>
-            <div className="block text-sm font-medium text-gray-700 mb-1">
+            <fieldset className="space-y-2" aria-describedby={errors.objectives ? "objectives-error" : undefined}>
+            <legend className="block text-sm font-medium text-gray-700 mb-1">
               {language === 'fr' ? 'Objectifs de conformité' : 'Compliance Objectives'}
-            </div>
+            </legend>
             <Controller
               name="objectives"
               control={control}
@@ -253,6 +265,7 @@ function TrialForm() {
                         id={`objective-${option.value}`}
                         value={option.value}
                         checked={field.value.includes(option.value)}
+                        aria-invalid={!!errors.objectives}
                         onChange={(e) => {
                           // La valeur est maintenant correctement typée grâce à notre constante OBJECTIVES
                           const value = option.value;
@@ -269,8 +282,9 @@ function TrialForm() {
                 </div>
               )}
             />
+            </fieldset>
             {errors.objectives && (
-              <p className="mt-1 text-sm text-red-600">{errors.objectives.message}</p>
+              <p id="objectives-error" className="mt-1 text-sm text-red-600">{errors.objectives.message}</p>
             )}
           </div>
 

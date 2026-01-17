@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useId } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -9,11 +9,14 @@ interface FAQItemProps {
 
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const contentId = useId();
 
   return (
     <div className="bg-white">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls={contentId}
         className="w-full py-4 flex items-center justify-between text-left"
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
@@ -35,6 +38,8 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
+            id={contentId}
+            role="region"
           >
             <div className="pb-6 text-gray-600">
               {answer}

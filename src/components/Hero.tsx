@@ -122,7 +122,7 @@ export function Hero() {
                   prefix="Email" 
                   field="email"
                   errors={state.errors}
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-600 text-sm mt-1"
                 />
               </div>
               <button

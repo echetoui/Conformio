@@ -11,7 +11,7 @@ export const fr = {
   hero: {
     badge: 'Nouveau',
     title: 'La conformité au service de votre croissance',
-    subtitle: 'De la TGV à SOC 2, tout ce qu\'il faut pour inspirer confiance à vos clients et investisseurs',
+    subtitle: 'De la norme TGV au SOC 2, tout ce qu\'il faut pour inspirer confiance à vos clients et investisseurs',
     emailPlaceholder: 'Votre adresse email',
     cta: '🚀 Rejoindre la version bêta',
     contact: '🤝 Parler à l\'équipe',
@@ -74,7 +74,7 @@ export const fr = {
     legal: 'Mentions Légales',
     privacy: 'Politique de Confidentialité',
     terms: 'Conditions d\'Utilisation',
-    description: 'Solution de cybersécurité moderne pour entreprises',
+    description: 'Automatisez votre conformité avec SOC 2, ISO 27001 et TGV au Québec',
     copyright: '© 2024 Conformio. Tous droits réservés.'
   },
 

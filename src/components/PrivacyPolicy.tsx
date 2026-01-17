@@ -1,11 +1,14 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { PageHelmet } from './PageHelmet';
 
 const PrivacyPolicy = () => {
   const { language } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <>
+      <PageHelmet metaKey="privacy" />
+      <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
           {language === 'fr' ? 'Politique de Confidentialité' : 'Privacy Policy'}
@@ -85,6 +88,7 @@ const PrivacyPolicy = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

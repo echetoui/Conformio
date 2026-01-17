@@ -1,1 +1,44 @@
- 
+# Conformio Robots.txt
+# Règles de crawl pour les moteurs de recherche
+
+# Règles globales pour tous les bots
+User-agent: *
+Allow: /
+Allow: /#/
+Allow: /#/privacy
+Allow: /#/terms
+Allow: /#/contact
+
+# Désactiver les fichiers indésirables
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /scripts/
+Disallow: *.map
+
+# Sitemap
+Sitemap: https://conformio.ca/sitemap.xml
+
+# Crawl Delay (délai entre les requêtes - 0.5 secondes)
+Crawl-delay: 0.5
+
+# Règles spécifiques pour Google
+User-agent: Googlebot
+Allow: /
+
+# Règles spécifiques pour Bing
+User-agent: Bingbot
+Allow: /
+
+# Bloquer les bots malveillants connus
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: DotBot
+Disallow: /
+
+# Règles par défaut
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /.env
+Disallow: /.config
