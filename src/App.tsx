@@ -52,27 +52,30 @@ const ContactRedirect = () => {
     const timer = setTimeout(() => {
       window.location.href = 'https://cal.com/conformio';
     }, 100);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold mb-4">Redirection vers le calendrier...</h1>
-        <p className="text-gray-600">
-          Si vous n'êtes pas redirigé automatiquement,{' '}
-          <a 
-            href="https://cal.com/conformio"
-            className="text-blue-600 hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            cliquez ici
-          </a>
-        </p>
+    <>
+      <PageHelmet metaKey="contact" />
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Redirection vers le calendrier...</h1>
+          <p className="text-gray-600">
+            Si vous n'êtes pas redirigé automatiquement,{' '}
+            <a
+              href="https://cal.com/conformio"
+              className="text-blue-600 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              cliquez ici
+            </a>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -12,6 +12,10 @@ export const en = {
     terms: {
       title: 'Terms of Service - Conformio',
       description: 'Review the terms and conditions for using Conformio.'
+    },
+    contact: {
+      title: 'Contact Us - Conformio',
+      description: 'Get in touch with the Conformio team. Schedule a meeting to discuss your compliance needs.'
     }
   },
 

@@ -1,4 +1,24 @@
 export const fr = {
+  // Meta Tags (SEO)
+  meta: {
+    home: {
+      title: 'Conformio - Plateforme de Gestion de la Conformité pour SaaS',
+      description: 'Simplifiez votre conformité avec Conformio. Gérez les normes SOC 2, ISO 27001 et TGV à partir d\'une seule plateforme. Collecte automatique des preuves et surveillance en temps réel.'
+    },
+    privacy: {
+      title: 'Politique de Confidentialité - Conformio',
+      description: 'Découvrez comment Conformio collecte, utilise et protège vos données.'
+    },
+    terms: {
+      title: 'Conditions d\'Utilisation - Conformio',
+      description: 'Examinez les conditions d\'utilisation de Conformio.'
+    },
+    contact: {
+      title: 'Nous Contacter - Conformio',
+      description: 'Entrez en contact avec l\'équipe Conformio. Planifiez une réunion pour discuter de vos besoins de conformité.'
+    }
+  },
+
   nav: {
     features: 'Fonctionnalités',
     benefits: 'Avantages',

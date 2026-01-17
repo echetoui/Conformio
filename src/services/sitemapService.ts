@@ -94,9 +94,21 @@ ${urlElements}
 
   /**
    * Obtient les URLs canoniques pour une route
+   * @param path - Peut être une URL pathname ou un hash (#/path)
    */
   getCanonicalUrl(path: string): string {
-    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+    let normalizedPath = path;
+
+    // Si c'est un hash, l'utiliser directement
+    if (path.startsWith('#')) {
+      normalizedPath = path.slice(1); // Enlever le #
+    }
+
+    // S'assurer que le path commence par /
+    if (!normalizedPath.startsWith('/')) {
+      normalizedPath = `/${normalizedPath}`;
+    }
+
     return `${this.baseUrl}/#${normalizedPath}`;
   }
 }

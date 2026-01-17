@@ -1,12 +1,22 @@
 import { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../context/LanguageContext';
+import { sitemapService } from '../services/sitemapService';
 
-export function usePageMeta(metaKey: 'home' | 'privacy' | 'terms') {
+// Mapper les metaKey aux routes
+const metaKeyToRoute: Record<string, string> = {
+  home: '/',
+  privacy: '/privacy',
+  terms: '/terms',
+  contact: '/contact',
+};
+
+export function usePageMeta(metaKey: 'home' | 'privacy' | 'terms' | 'contact') {
   const { t } = useLanguage();
 
   const title = t(`meta.${metaKey}.title`);
   const description = t(`meta.${metaKey}.description`);
+  const route = metaKeyToRoute[metaKey] || '/';
+  const canonicalUrl = sitemapService.getCanonicalUrl(route);
 
   useEffect(() => {
     // Update document title
@@ -20,7 +30,16 @@ export function usePageMeta(metaKey: 'home' | 'privacy' | 'terms') {
       document.head.appendChild(metaDescription);
     }
     metaDescription.setAttribute('content', description);
-  }, [title, description]);
 
-  return { title, description };
+    // Update canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', canonicalUrl);
+  }, [title, description, canonicalUrl]);
+
+  return { title, description, canonicalUrl };
 }
