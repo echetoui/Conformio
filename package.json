@@ -17,7 +17,7 @@
     "@formspree/react": "^3.0.0",
     "@hookform/resolvers": "^5.2.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
+    "dotenv": "^17.2.3",
     "escape-html": "^1.0.3",
     "express": "^5.1.0",
     "framer-motion": "^12.6.3",
