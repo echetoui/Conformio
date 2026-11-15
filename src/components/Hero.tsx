@@ -11,7 +11,7 @@ const StandardBadge = ({
 }: {
   name: string;
   description: string;
-  standard: 'soc2' | 'iso' | 'privacy' | 'tgv';
+  standard: 'soc2' | 'iso' | 'privacy' | 'tgv' | 'other';
 }) => {
   return (
     <div className="relative group flex flex-col items-center justify-center h-full">
@@ -48,8 +48,13 @@ export function Hero() {
     {
       name: 'TGV',
       standard: 'tgv' as const,
-      description: 'Norme gouvernementale',
-    }
+      description: language === 'fr' ? 'Norme gouvernementale' : 'Government framework',
+    },
+    {
+      name: language === 'fr' ? 'Autre' : 'Other',
+      standard: 'other' as const,
+      description: language === 'fr' ? 'Autre référentiel ou exigence' : 'Other framework or requirement',
+    },
   ];
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Activity, BrainCircuit, ChartNoAxesCombined, FileCheck2, Globe2, PlugZap, Radar, ShieldCheck, Timer, Waypoints, Zap } from 'lucide-react';
+import { Activity, BrainCircuit, ChartNoAxesCombined, FileCheck2, Globe2, Layers3, PlugZap, Radar, ShieldCheck, Timer, Waypoints, Zap } from 'lucide-react';
 
 export type SpatialIllustrationVariant =
   | 'shield'
@@ -138,8 +138,16 @@ export function SpatialInterfacePreview({ variant, imageSrc, imageAlt = '' }: Sp
   );
 }
 
-export function SpatialStandardIcon({ variant }: { variant: 'soc2' | 'iso' | 'privacy' | 'tgv' }) {
-  const Icon = variant === 'soc2' ? ShieldCheck : variant === 'iso' ? FileCheck2 : variant === 'privacy' ? Radar : Globe2;
+export function SpatialStandardIcon({ variant }: { variant: 'soc2' | 'iso' | 'privacy' | 'tgv' | 'other' }) {
+  const Icon = variant === 'soc2'
+    ? ShieldCheck
+    : variant === 'iso'
+      ? FileCheck2
+      : variant === 'privacy'
+        ? Radar
+        : variant === 'tgv'
+          ? Globe2
+          : Layers3;
 
   return (
     <div className={`spatial-standard-icon spatial-standard-icon-${variant}`} aria-hidden="true">

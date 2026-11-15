@@ -29,7 +29,8 @@ function TrialForm() {
     LOI_25: 'Loi 25',
     SOC_2: 'SOC 2',
     TGV: 'TGV',
-    ISO_27001: 'ISO 27001'
+    ISO_27001: 'ISO 27001',
+    OTHER: 'Autre'
   } as const;
   
   // Créer un type à partir des valeurs d'objectifs
@@ -43,7 +44,7 @@ function TrialForm() {
     ),
     companyName: z.string().min(2, validationMessages.companyName),
     teamSize: z.enum(['1-5', '6-20', '21-50', '50+']),
-    objectives: z.array(z.enum([OBJECTIVES.LOI_25, OBJECTIVES.SOC_2, OBJECTIVES.TGV, OBJECTIVES.ISO_27001])).min(1, validationMessages.objectives),
+    objectives: z.array(z.enum([OBJECTIVES.LOI_25, OBJECTIVES.SOC_2, OBJECTIVES.TGV, OBJECTIVES.ISO_27001, OBJECTIVES.OTHER])).min(1, validationMessages.objectives),
     utmSource: z.string().optional()
   });
 
@@ -69,13 +70,15 @@ function TrialForm() {
       { value: OBJECTIVES.LOI_25, label: 'Loi 25' },
       { value: OBJECTIVES.SOC_2, label: 'SOC 2' },
       { value: OBJECTIVES.ISO_27001, label: 'ISO 27001' },
-      { value: OBJECTIVES.TGV, label: 'TGV (Trousse globale de vérification)' }
+      { value: OBJECTIVES.TGV, label: 'TGV (Trousse globale de vérification)' },
+      { value: OBJECTIVES.OTHER, label: 'Autre' }
     ],
     en: [
       { value: OBJECTIVES.LOI_25, label: 'Bill 25' },
       { value: OBJECTIVES.SOC_2, label: 'SOC 2' },
       { value: OBJECTIVES.ISO_27001, label: 'ISO 27001' },
-      { value: OBJECTIVES.TGV, label: 'TGV (Global Verification Toolkit)' }
+      { value: OBJECTIVES.TGV, label: 'TGV (Global Verification Toolkit)' },
+      { value: OBJECTIVES.OTHER, label: 'Other' }
     ]
   };
 
