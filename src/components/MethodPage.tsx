@@ -15,6 +15,101 @@ type MethodStep = {
   deliverable: string;
 };
 
+type DeliverablePreviewProps = {
+  kind: 'roadmap' | 'evidence' | 'matrix';
+  isFrench: boolean;
+};
+
+const DeliverablePreview = ({ kind, isFrench }: DeliverablePreviewProps) => {
+  const content = {
+    roadmap: isFrench
+      ? {
+          label: 'Priorités · responsables · échéances',
+          title: 'Feuille de route priorisée',
+          rows: [
+            ['Politique d’accès', 'Priorité haute', 'En cours'],
+            ['Revue des fournisseurs', 'Priorité moyenne', 'À planifier'],
+            ['Test de restauration', 'Priorité basse', 'Planifié'],
+          ],
+        }
+      : {
+          label: 'Priorities · owners · due dates',
+          title: 'Prioritized roadmap',
+          rows: [
+            ['Access policy', 'High priority', 'In progress'],
+            ['Vendor review', 'Medium priority', 'To schedule'],
+            ['Restore test', 'Low priority', 'Planned'],
+          ],
+        },
+    evidence: isFrench
+      ? {
+          label: 'Documents · contrôles · historique',
+          title: 'Registre de preuves',
+          rows: [
+            ['Procédure d’accès', 'Validée', '12 juin 2026'],
+            ['Journal des revues', 'À renouveler', '30 juin 2026'],
+            ['Rapport de test', 'En attente', 'Responsable à confirmer'],
+          ],
+        }
+      : {
+          label: 'Documents · controls · history',
+          title: 'Evidence register',
+          rows: [
+            ['Access procedure', 'Approved', 'June 12, 2026'],
+            ['Review log', 'Renewal due', 'June 30, 2026'],
+            ['Test report', 'Pending', 'Owner to confirm'],
+          ],
+        },
+    matrix: isFrench
+      ? {
+          label: 'Exigences · contrôles · couverture',
+          title: 'Matrice de conformité',
+          rows: [
+            ['Loi 25 · PR-01', 'Politique de confidentialité', 'Couvert'],
+            ['SOC 2 · CC6.1', 'Gestion des accès', 'Partiel'],
+            ['ISO 27001 · A.8', 'Inventaire des actifs', 'À traiter'],
+          ],
+        }
+      : {
+          label: 'Requirements · controls · coverage',
+          title: 'Compliance matrix',
+          rows: [
+            ['Bill 25 · PR-01', 'Privacy policy', 'Covered'],
+            ['SOC 2 · CC6.1', 'Access management', 'Partial'],
+            ['ISO 27001 · A.8', 'Asset inventory', 'To address'],
+          ],
+        },
+  }[kind];
+
+  return (
+    <article className="glass-panel rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-cyan-200/75">{content.label}</p>
+          <h3 className="mt-2 text-base font-semibold text-slate-100">{content.title}</h3>
+        </div>
+        <span className="rounded-lg border border-cyan-200/20 bg-cyan-200/10 px-2 py-1 text-[0.65rem] font-semibold text-cyan-100">
+          {isFrench ? 'Aperçu' : 'Preview'}
+        </span>
+      </div>
+      <div className="mt-5 overflow-hidden rounded-xl border border-white/10 bg-slate-950/35">
+        <div className="grid grid-cols-[1.35fr_1fr_0.9fr] gap-2 border-b border-white/10 px-3 py-2 text-[0.62rem] font-bold uppercase tracking-[0.1em] text-slate-500">
+          <span>{isFrench ? 'Élément' : 'Item'}</span>
+          <span>{isFrench ? 'État' : 'Status'}</span>
+          <span>{isFrench ? 'Repère' : 'Signal'}</span>
+        </div>
+        {content.rows.map(([item, status, signal], index) => (
+          <div key={item} className="grid grid-cols-[1.35fr_1fr_0.9fr] gap-2 border-b border-white/5 px-3 py-3 text-[0.7rem] last:border-0">
+            <span className="min-w-0 truncate font-medium text-slate-200">{item}</span>
+            <span className={`truncate ${index === 0 ? 'text-cyan-200' : index === 1 ? 'text-violet-200' : 'text-slate-400'}`}>{status}</span>
+            <span className="truncate text-slate-500">{signal}</span>
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+};
+
 const MethodPage = () => {
   const { language } = useLanguage();
   const isFrench = language === 'fr';
@@ -150,20 +245,9 @@ const MethodPage = () => {
               </p>
             </div>
             <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {(isFrench
-                ? ['Feuille de route priorisée', 'Registre de preuves', 'Matrice de conformité']
-                : ['Prioritized roadmap', 'Evidence register', 'Compliance matrix']
-              ).map((label, index) => (
-                <div key={label} className="glass-panel rounded-2xl p-5">
-                  <div className="mb-5 h-2 w-20 rounded-full bg-cyan-200/60" />
-                  <p className="text-sm font-semibold text-slate-100">{label}</p>
-                  <div className="mt-5 space-y-2" aria-hidden="true">
-                    <div className="h-2 rounded-full bg-white/15" />
-                    <div className="h-2 w-4/5 rounded-full bg-white/10" />
-                    <div className={`h-2 rounded-full ${index === 1 ? 'w-3/5 bg-iris-300/50' : 'w-2/3 bg-cyan-300/35'}`} />
-                  </div>
-                </div>
-              ))}
+              <DeliverablePreview kind="roadmap" isFrench={isFrench} />
+              <DeliverablePreview kind="evidence" isFrench={isFrench} />
+              <DeliverablePreview kind="matrix" isFrench={isFrench} />
             </div>
           </section>
 
