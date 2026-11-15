@@ -12,7 +12,7 @@ const routes = [
   {
     path: 'fr',
     lang: 'fr',
-    title: 'Conformio — Plateforme de conformité au Québec et au Canada',
+    title: 'Conformio — Conformité au Québec et au Canada',
     description: 'Structurez ISO 27001, SOC 2, Loi 25 et TGV avec une plateforme de pilotage adaptée aux entreprises québécoises et canadiennes.',
     h1: 'Pilotez votre conformité avec une feuille de route claire',
     h2: 'Une méthode claire pour piloter votre conformité',
@@ -26,7 +26,7 @@ const routes = [
   {
     path: 'en',
     lang: 'en',
-    title: 'Conformio — Compliance platform for Quebec and Canada',
+    title: 'Conformio — Compliance in Quebec and Canada',
     description: 'Structure ISO 27001, SOC 2, Quebec privacy requirements, and TGV with a compliance platform built for Canadian companies.',
     h1: 'Lead compliance with a clear action plan',
     h2: 'A clear method for leading compliance',

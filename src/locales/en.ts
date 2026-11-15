@@ -2,7 +2,7 @@ export const en = {
   // Meta Tags (SEO)
   meta: {
     home: {
-      title: 'Conformio — Compliance platform for Quebec and Canada',
+      title: 'Conformio — Compliance in Quebec and Canada',
       description: 'Structure ISO 27001, SOC 2, Quebec privacy requirements, and TGV with a compliance platform built for Canadian companies.'
     },
     privacy: {

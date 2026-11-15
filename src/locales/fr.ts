@@ -2,7 +2,7 @@ export const fr = {
   // Meta Tags (SEO)
   meta: {
     home: {
-      title: 'Conformio — Plateforme de conformité au Québec et au Canada',
+      title: 'Conformio — Conformité au Québec et au Canada',
       description: 'Structurez ISO 27001, SOC 2, Loi 25 et TGV avec une plateforme de pilotage adaptée aux entreprises québécoises et canadiennes.'
     },
     privacy: {
