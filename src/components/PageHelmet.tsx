@@ -4,15 +4,16 @@ import { useLanguage } from '../context/LanguageContext';
 import { sitemapService } from '../services/sitemapService';
 
 interface PageHelmetProps {
-  metaKey: 'home' | 'privacy' | 'terms' | 'contact';
+  metaKey: 'home' | 'privacy' | 'terms' | 'contact' | 'method';
 }
 
 // Mapper les metaKey aux routes
 const metaKeyToRoute: Record<string, string> = {
-  home: '/',
+  home: '/fr',
   privacy: '/privacy',
   terms: '/terms',
   contact: '/contact',
+  method: '/fr/methode-conformite',
 };
 
 export const PageHelmet: React.FC<PageHelmetProps> = ({ metaKey }) => {
@@ -20,7 +21,11 @@ export const PageHelmet: React.FC<PageHelmetProps> = ({ metaKey }) => {
 
   const title = t(`meta.${metaKey}.title`);
   const description = t(`meta.${metaKey}.description`);
-  const route = metaKeyToRoute[metaKey] || '/';
+  const route = metaKey === 'home'
+    ? (window.location.pathname.startsWith('/en') ? '/en' : '/fr')
+    : metaKey === 'method'
+      ? (window.location.pathname.startsWith('/en/') ? '/en/compliance-method' : '/fr/methode-conformite')
+      : metaKeyToRoute[metaKey] || '/fr';
   const canonicalUrl = sitemapService.getCanonicalUrl(route);
 
   return (

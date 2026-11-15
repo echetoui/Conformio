@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { SUPPORTED_LANGUAGES, getBrowserLanguage, isValidLanguage } from '../utils/language';
+import { getBrowserLanguage, isValidLanguage } from '../utils/language';
 import { en } from "../locales/en";
 import { fr } from "../locales/fr";
 
@@ -12,9 +12,10 @@ interface LanguageContextValue {
   t: (key: string) => string;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const LanguageContext = createContext<LanguageContextValue>({
   language: 'en',
-  setLanguage: () => {},
+  setLanguage: () => undefined,
   t: (key: string) => key,
 });
 
@@ -23,12 +24,32 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(getBrowserLanguage() as Language);
+  const getRouteLanguage = (): Language | null => {
+    const segment = window.location.pathname.split('/')[1];
+    return isValidLanguage(segment) ? segment : null;
+  };
+
+  const [language, setLanguageState] = useState<Language>(getRouteLanguage() ?? getBrowserLanguage());
+
+  const setLanguage = (nextLanguage: Language) => {
+    setLanguageState(nextLanguage);
+    document.documentElement.lang = nextLanguage;
+
+    const routeMatch = window.location.pathname.match(/^\/(fr|en)(.*)$/);
+    if (routeMatch) {
+      window.history.replaceState({}, '', `/${nextLanguage}${routeMatch[2] || ''}${window.location.search}${window.location.hash}`);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
 
   useEffect(() => {
     if (!isValidLanguage(language)) {
       setLanguage('en');
     }
+  }, [language]);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
   }, [language]);
 
   const translations: Record<Language, Translations> = {
@@ -62,6 +83,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {

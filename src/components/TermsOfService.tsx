@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { PageHelmet } from './PageHelmet';
+import { Link } from 'react-router-dom';
 
 const TermsOfService = () => {
   const { language } = useLanguage();
@@ -10,7 +11,18 @@ const TermsOfService = () => {
       <PageHelmet metaKey="terms" />
       <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+        <nav className="mb-10 flex flex-wrap gap-4 text-sm" aria-label="Navigation interne">
+          <Link to={language === 'en' ? '/en' : '/fr'} className="text-blue-600 hover:underline">
+            {language === 'fr' ? 'Accueil' : 'Home'}
+          </Link>
+          <Link to="/privacy" className="text-blue-600 hover:underline">
+            {language === 'fr' ? 'Confidentialité' : 'Privacy policy'}
+          </Link>
+          <Link to="/contact" className="text-blue-600 hover:underline">
+            Contact
+          </Link>
+        </nav>
+        <h1 tabIndex={-1} className="text-3xl font-bold text-gray-900 mb-8 focus:outline-none">
           {language === 'fr' ? 'Conditions d\'Utilisation' : 'Terms of Service'}
         </h1>
         
@@ -27,8 +39,8 @@ const TermsOfService = () => {
             </h2>
             <p className="text-gray-600 mb-4">
               {language === 'fr'
-                ? 'En accédant et en utilisant les services de Conformio, vous acceptez d\'être lié par ces conditions d\'utilisation.'
-                : 'By accessing and using Conformio\'s services, you agree to be bound by these terms of service.'}
+                ? 'En utilisant le site de Conformio, vous acceptez ces conditions. Vous devez utiliser le site de façon légale et respectueuse.'
+                : 'By using the Conformio site, you accept these terms. You must use the site in a lawful and respectful way.'}
             </p>
           </section>
 
@@ -38,8 +50,8 @@ const TermsOfService = () => {
             </h2>
             <p className="text-gray-600 mb-4">
               {language === 'fr'
-                ? 'Conformio fournit des services de conformité et de gestion des risques pour les entreprises. Nos services incluent l\'évaluation, la documentation et le suivi de la conformité aux normes et réglementations.'
-                : 'Conformio provides compliance and risk management services for businesses. Our services include assessment, documentation, and monitoring of compliance with standards and regulations.'}
+                ? 'Conformio présente une méthode pour structurer la conformité et les risques. Le contenu du site est informatif. Il ne remplace pas un avis juridique ni une certification.'
+                : 'Conformio presents a method for structuring compliance and risk work. Site content is for information. It is not legal advice or a certification.'}
             </p>
           </section>
 
@@ -49,13 +61,13 @@ const TermsOfService = () => {
             </h2>
             <p className="text-gray-600 mb-4">
               {language === 'fr'
-                ? 'En utilisant nos services, vous vous engagez à :'
-                : 'By using our services, you agree to:'}
+                ? 'Vous devez :'
+                : 'You must:'}
             </p>
             <ul className="list-disc pl-6 text-gray-600 mb-4">
-              <li>{language === 'fr' ? 'Fournir des informations exactes et à jour' : 'Provide accurate and up-to-date information'}</li>
-              <li>{language === 'fr' ? 'Maintenir la confidentialité de votre compte' : 'Maintain the confidentiality of your account'}</li>
-              <li>{language === 'fr' ? 'Utiliser les services de manière légale et éthique' : 'Use the services in a legal and ethical manner'}</li>
+              <li>{language === 'fr' ? 'Fournir des informations exactes' : 'Provide accurate information'}</li>
+              <li>{language === 'fr' ? 'Protéger vos accès' : 'Protect your access details'}</li>
+              <li>{language === 'fr' ? 'Utiliser le site de façon légale' : 'Use the site lawfully'}</li>
             </ul>
           </section>
 
@@ -65,8 +77,8 @@ const TermsOfService = () => {
             </h2>
             <p className="text-gray-600 mb-4">
               {language === 'fr'
-                ? 'Tous les droits de propriété intellectuelle liés à nos services sont et restent la propriété de Conformio.'
-                : 'All intellectual property rights related to our services are and remain the property of Conformio.'}
+                ? 'La marque, le contenu et les éléments visuels du site appartiennent à Conformio, sauf indication contraire.'
+                : 'The Conformio brand, site content, and visual elements belong to Conformio unless stated otherwise.'}
             </p>
           </section>
 
@@ -92,4 +104,4 @@ const TermsOfService = () => {
   );
 };
 
-export default TermsOfService; 
+export default TermsOfService;

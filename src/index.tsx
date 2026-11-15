@@ -1,8 +1,9 @@
 import './index.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { MotionConfig } from 'framer-motion';
 import { App } from './App';
 
 const container = document.getElementById('root');
@@ -12,9 +13,11 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <HelmetProvider>
-      <Router>
-        <App />
-      </Router>
+      <MotionConfig reducedMotion="user">
+        <Router>
+          <App />
+        </Router>
+      </MotionConfig>
     </HelmetProvider>
   </React.StrictMode>
 );

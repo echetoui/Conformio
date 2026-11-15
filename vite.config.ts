@@ -47,7 +47,7 @@ export default defineConfig({
         comments: false
       }
     },
-    sourcemap: true,
+    sourcemap: false,
     reportCompressedSize: true
   },
   css: {

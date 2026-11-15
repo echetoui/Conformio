@@ -2,8 +2,8 @@ export const en = {
   // Meta Tags (SEO)
   meta: {
     home: {
-      title: 'Conformio - Compliance Management Platform for SaaS',
-      description: 'Simplify your compliance with Conformio. Manage SOC 2, ISO 27001, and TGV standards from a single platform. Automated evidence collection and real-time monitoring.'
+      title: 'Conformio — Compliance platform for Quebec and Canada',
+      description: 'Structure ISO 27001, SOC 2, Quebec privacy requirements, and TGV with a compliance platform built for Canadian companies.'
     },
     privacy: {
       title: 'Privacy Policy - Conformio',
@@ -14,16 +14,21 @@ export const en = {
       description: 'Review the terms and conditions for using Conformio.'
     },
     contact: {
-      title: 'Contact Us - Conformio',
+      title: 'Contact Conformio — Compliance planning from Quebec',
       description: 'Get in touch with the Conformio team. Schedule a meeting to discuss your compliance needs.'
+    },
+    method: {
+      title: 'ISO 27001, SOC 2 and privacy compliance method | Conformio',
+      description: 'Learn how Conformio maps requirements, prioritizes gaps, organizes actions, and prepares evidence for review.'
     }
   },
 
   // Navigation
   nav: {
     features: 'Features',
+    method: 'Our method',
     benefits: 'Benefits',
-    about: 'About',
+    about: 'Questions',
     contact: 'Contact',
     getStarted: 'Get Started',
     language: 'EN'
@@ -32,11 +37,11 @@ export const en = {
   // Hero
   hero: {
     badge: 'New',
-    title: 'Compliance at the service of your growth',
-    subtitle: 'From TGV to SOC 2, everything you need to inspire trust in your clients and investors',
-    emailPlaceholder: 'Your email address',
-    cta: '🚀 Join the beta',
-    contact: '🤝 Talk to the team',
+    title: 'Lead compliance with a clear action plan',
+    subtitle: 'Structure ISO 27001, SOC 2, Quebec privacy requirements, and TGV. Set priorities, coordinate actions, and prepare evidence for customers, audits, and new markets.',
+    emailPlaceholder: 'Your professional email',
+    cta: 'Assess my compliance path',
+    contact: 'Get an initial orientation',
     loading: 'Loading...',
     successMessage: 'Thank you! You will hear from us soon.',
     errorMessage: 'An error occurred. Please try again.'
@@ -44,45 +49,45 @@ export const en = {
 
   // Benefits
   benefits: {
-    title: 'Why choose our solution?',
-    subtitle: 'A complete platform to manage your compliance and accelerate your growth',
+    title: 'Why teams choose Conformio',
+    subtitle: 'A platform built for Quebec and Canadian companies that want to lead compliance with clarity.',
     security: {
       title: 'Compliance by design',
-      description: 'Integrate compliance from the design of your products and services'
+      description: 'Bring standards, obligations, and goals into one shared view.'
     },
     speed: {
       title: 'Smart automation',
-      description: 'Automate repetitive tasks and focus on what matters'
+      description: 'Turn gaps into an action plan ranked by impact and urgency.'
     },
     time: {
       title: 'Time savings',
-      description: 'Reduce compliance time by 70%'
+      description: 'Give each action an owner and track the next steps.'
     },
     analytics: {
       title: 'Dashboards',
-      description: 'Track your progress and identify areas for improvement'
+      description: 'Keep documents, approvals, and history ready for review.'
     }
   },
 
   // Features
   features: {
-    title: 'How Conformio Simplifies Your Compliance',
-    subtitle: 'Automate your obligations, track your posture, and stay compliant without slowing down.',
+    title: 'A clear method for leading compliance',
+    subtitle: 'Turn scattered requirements into clear priorities, owners, and evidence your team can track.',
     step1: {
-      title: 'Connect your tools',
-      description: 'Integrate your systems (HR, security, legal) with just a few clicks.'
+      title: 'Map your requirements',
+      description: 'Connect obligations, standards and priorities to one actionable compliance view.'
     },
     step2: {
-      title: 'Get your action plan',
-      description: 'A personalized roadmap for each standard.'
+      title: 'Set your priorities',
+      description: 'Find the gaps with the greatest impact on your business.'
     },
     step3: {
-      title: 'Track your progress',
-      description: 'Visualize your posture in real-time and collaborate with your team.'
+      title: 'Organize the action plan',
+      description: 'Assign ownership and plan the next steps.'
     },
     step4: {
-      title: 'Real-time monitoring',
-      description: 'Live status, alerts, assigned tasks: always ready for audit.'
+      title: 'Prepare your evidence',
+      description: 'Keep the evidence needed for reviews, audits, and customers in one place.'
     }
   },
 
@@ -99,7 +104,7 @@ export const en = {
     legal: 'Legal',
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
-    description: 'Modern cybersecurity solution for businesses',
+    description: 'A structured compliance path from Quebec to your next market',
     copyright: '© 2024 Conformio. All rights reserved.'
   },
 
@@ -126,4 +131,4 @@ export const en = {
       objectives: 'Select at least one objective'
     }
   }
-}; 
+};

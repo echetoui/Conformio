@@ -13,7 +13,7 @@ interface SitemapEntry {
 export class SitemapService {
   private baseUrl: string;
 
-  constructor(baseUrl: string = 'https://conformio.ca') {
+  constructor(baseUrl = 'https://www.conformio.ca') {
     this.baseUrl = baseUrl.replace(/\/$/, ''); // Remove trailing slash
   }
 
@@ -25,25 +25,43 @@ export class SitemapService {
 
     return [
       {
-        loc: `${this.baseUrl}/#/`,
+        loc: `${this.baseUrl}/fr`,
         lastmod: today,
         changefreq: 'weekly',
         priority: 1.0,
       },
       {
-        loc: `${this.baseUrl}/#/privacy`,
+        loc: `${this.baseUrl}/en`,
+        lastmod: today,
+        changefreq: 'weekly',
+        priority: 0.9,
+      },
+      {
+        loc: `${this.baseUrl}/fr/methode-conformite`,
+        lastmod: today,
+        changefreq: 'monthly',
+        priority: 0.8,
+      },
+      {
+        loc: `${this.baseUrl}/en/compliance-method`,
+        lastmod: today,
+        changefreq: 'monthly',
+        priority: 0.8,
+      },
+      {
+        loc: `${this.baseUrl}/privacy`,
         lastmod: today,
         changefreq: 'monthly',
         priority: 0.5,
       },
       {
-        loc: `${this.baseUrl}/#/terms`,
+        loc: `${this.baseUrl}/terms`,
         lastmod: today,
         changefreq: 'monthly',
         priority: 0.5,
       },
       {
-        loc: `${this.baseUrl}/#/contact`,
+        loc: `${this.baseUrl}/contact`,
         lastmod: today,
         changefreq: 'monthly',
         priority: 0.7,
@@ -94,12 +112,12 @@ ${urlElements}
 
   /**
    * Obtient les URLs canoniques pour une route
-   * @param path - Peut être une URL pathname ou un hash (#/path)
+   * @param path - URL pathname ou route relative
    */
   getCanonicalUrl(path: string): string {
     let normalizedPath = path;
 
-    // Si c'est un hash, l'utiliser directement
+    // Accepter les anciennes routes hash sans les conserver dans l'URL canonique.
     if (path.startsWith('#')) {
       normalizedPath = path.slice(1); // Enlever le #
     }
@@ -109,7 +127,7 @@ ${urlElements}
       normalizedPath = `/${normalizedPath}`;
     }
 
-    return `${this.baseUrl}/#${normalizedPath}`;
+    return `${this.baseUrl}${normalizedPath}`;
   }
 }
 

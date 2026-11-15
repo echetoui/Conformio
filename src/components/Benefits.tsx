@@ -1,64 +1,75 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { SpatialIllustration, SpatialIllustrationVariant } from './SpatialIllustration';
 
 const Benefits = () => {
   const { t } = useLanguage();
 
   const benefits = [
     {
-      icon: '🛡️',
+      variant: 'shield' as SpatialIllustrationVariant,
+      eyebrow: 'Trust layer',
+      imageSrc: '/images/features/trust-layer.webp',
       title: t('benefits.security.title'),
       description: t('benefits.security.description'),
     },
     {
-      icon: '⚡',
+      variant: 'automation' as SpatialIllustrationVariant,
+      eyebrow: 'Signal layer',
+      imageSrc: '/images/features/signal-layer.webp',
       title: t('benefits.speed.title'),
       description: t('benefits.speed.description'),
     },
     {
-      icon: '⏱️',
+      variant: 'time' as SpatialIllustrationVariant,
+      eyebrow: 'Momentum layer',
+      imageSrc: '/images/features/momentum-layer.webp',
       title: t('benefits.time.title'),
       description: t('benefits.time.description'),
     },
     {
-      icon: '📊',
+      variant: 'analytics' as SpatialIllustrationVariant,
+      eyebrow: 'Visibility layer',
+      imageSrc: '/images/features/visibility-layer.webp',
       title: t('benefits.analytics.title'),
       description: t('benefits.analytics.description'),
     },
   ];
 
   return (
-    <section id="benefits" className="py-16 md:py-32 bg-white" aria-labelledby="benefits-title">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 id="benefits-title" className="text-3xl md:text-4xl font-bold text-text mb-4">
+    <section id="benefits" className="spatial-section" aria-labelledby="benefits-title">
+      <div className="spatial-container">
+        <div className="spatial-section-header mx-auto max-w-4xl text-center">
+          <h2 id="benefits-title" className="spatial-heading">
             {t('benefits.title')}
           </h2>
-          <p className="text-xl text-text/80">
+          <p className="spatial-copy mx-auto mt-4 max-w-2xl text-xl">
             {t('benefits.subtitle')}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="spatial-editorial-grid spatial-benefits-grid">
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="p-8 rounded-2xl bg-bg/50 hover:bg-bg/80 transition-colors"
+              className={`spatial-editorial-card ${index === 0 ? 'spatial-editorial-card-large' : index === 1 ? 'spatial-editorial-card-small' : ''}`}
               role="article"
               aria-labelledby={`benefit-title-${index}`}
             >
-              <div className="flex items-start gap-4">
-                <div className="text-4xl" aria-hidden="true">
-                  {benefit.icon}
-                </div>
-                <div>
-                  <h3 id={`benefit-title-${index}`} className="text-xl font-semibold text-text mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-text/80">
-                    {benefit.description}
-                  </p>
-                </div>
+              <SpatialIllustration
+                variant={benefit.variant}
+                label={benefit.eyebrow}
+                imageSrc={benefit.imageSrc}
+                imageAlt=""
+              />
+              <div className="spatial-editorial-content">
+                <p className="spatial-eyebrow mb-3">{benefit.eyebrow}</p>
+                <h3 id={`benefit-title-${index}`} className="mb-2 text-xl font-semibold text-slate-100">
+                  {benefit.title}
+                </h3>
+                <p className="text-slate-300/85">
+                  {benefit.description}
+                </p>
               </div>
             </div>
           ))}

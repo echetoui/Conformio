@@ -128,13 +128,14 @@ function TrialForm() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center p-8 rounded-2xl bg-green-50 border border-green-100"
+        className="glass-panel rounded-2xl p-8 text-center"
+        aria-live="polite"
       >
-        <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+        <CheckCircle className="mx-auto mb-4 h-16 w-16 text-cyan-300" aria-hidden="true" />
+        <h3 className="mb-2 text-2xl font-bold text-slate-100">
           {language === 'fr' ? 'Merci de votre intérêt !' : 'Thank you for your interest!'}
         </h3>
-        <p className="text-gray-600">
+        <p className="text-slate-300">
           {language === 'fr'
             ? 'Notre équipe vous contactera dans les prochaines 24 heures pour démarrer votre essai gratuit.'
             : 'Our team will contact you within the next 24 hours to start your free trial.'}
@@ -144,17 +145,17 @@ function TrialForm() {
   }
 
   return (
-    <section className="py-16 bg-white" id="trial">
-      <div className="max-w-xl mx-auto px-4">
+    <section className="spatial-section" id="trial" aria-labelledby="trial-title">
+      <div className="spatial-container max-w-xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 id="trial-title" className="spatial-heading">
             {language === 'fr' ? 'Commencez votre essai gratuit' : 'Start your free trial'}
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="spatial-copy mt-4 text-lg">
             {language === 'fr' 
               ? 'Découvrez comment Conformio peut vous aider à gérer votre conformité efficacement'
               : 'Discover how Conformio can help you manage your compliance effectively'}
@@ -166,10 +167,10 @@ function TrialForm() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6"
+          className="glass-panel space-y-6 rounded-2xl p-6 md:p-8"
         >
           <div>
-            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="fullName" className="mb-1 block text-sm font-medium text-slate-200">
               {language === 'fr' ? 'Nom complet' : 'Full Name'}
             </label>
             <input
@@ -179,16 +180,16 @@ function TrialForm() {
               aria-invalid={!!errors.fullName}
               aria-describedby={errors.fullName ? "fullName-error" : undefined}
               {...register('fullName')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300/40"
               placeholder="Jean Dupont"
             />
             {errors.fullName && (
-              <p id="fullName-error" className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
+              <p id="fullName-error" className="mt-1 text-sm text-rose-300">{errors.fullName.message}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-200">
               {language === 'fr' ? 'Email professionnel' : 'Professional Email'}
             </label>
             <input
@@ -198,16 +199,16 @@ function TrialForm() {
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? "email-error" : undefined}
               {...register('email')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300/40"
               placeholder="jean@entreprise.com"
             />
             {errors.email && (
-              <p id="email-error" className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+              <p id="email-error" className="mt-1 text-sm text-rose-300">{errors.email.message}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="companyName" className="mb-1 block text-sm font-medium text-slate-200">
               {language === 'fr' ? 'Nom de l\'entreprise' : 'Company Name'}
             </label>
             <input
@@ -217,16 +218,16 @@ function TrialForm() {
               aria-invalid={!!errors.companyName}
               aria-describedby={errors.companyName ? "companyName-error" : undefined}
               {...register('companyName')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-lg border border-white/15 bg-white/[0.06] px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300/40"
               placeholder="Entreprise Inc."
             />
             {errors.companyName && (
-              <p id="companyName-error" className="mt-1 text-sm text-red-600">{errors.companyName.message}</p>
+              <p id="companyName-error" className="mt-1 text-sm text-rose-300">{errors.companyName.message}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="teamSize" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="teamSize" className="mb-1 block text-sm font-medium text-slate-200">
               {language === 'fr' ? 'Taille de l\'équipe' : 'Team Size'}
             </label>
             <select
@@ -234,7 +235,7 @@ function TrialForm() {
               aria-invalid={!!errors.teamSize}
               aria-describedby={errors.teamSize ? "teamSize-error" : undefined}
               {...register('teamSize')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-lg border border-white/15 bg-slate-900 px-4 py-2 text-slate-100 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300/40"
             >
               <option value="">{language === 'fr' ? 'Sélectionnez une taille' : 'Select a size'}</option>
               {teamSizeOptions[language].map(option => (
@@ -244,13 +245,13 @@ function TrialForm() {
               ))}
             </select>
             {errors.teamSize && (
-              <p id="teamSize-error" className="mt-1 text-sm text-red-600">{errors.teamSize.message}</p>
+              <p id="teamSize-error" className="mt-1 text-sm text-rose-300">{errors.teamSize.message}</p>
             )}
           </div>
 
           <div>
             <fieldset className="space-y-2" aria-describedby={errors.objectives ? "objectives-error" : undefined}>
-            <legend className="block text-sm font-medium text-gray-700 mb-1">
+            <legend className="mb-1 block text-sm font-medium text-slate-200">
               {language === 'fr' ? 'Objectifs de conformité' : 'Compliance Objectives'}
             </legend>
             <Controller
@@ -276,7 +277,7 @@ function TrialForm() {
                         }}
                         className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                       />
-                      <span className="ml-2 text-gray-700">{option.label}</span>
+                      <span className="ml-2 text-slate-300">{option.label}</span>
                     </label>
                   ))}
                 </div>
@@ -284,22 +285,22 @@ function TrialForm() {
             />
             </fieldset>
             {errors.objectives && (
-              <p id="objectives-error" className="mt-1 text-sm text-red-600">{errors.objectives.message}</p>
+              <p id="objectives-error" className="mt-1 text-sm text-rose-300">{errors.objectives.message}</p>
             )}
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full px-6 py-3 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="spatial-button w-full disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting
               ? (language === 'fr' ? 'Envoi en cours...' : 'Sending...')
-              : (language === 'fr' ? '🎁 Commencer l\'essai gratuit' : '🎁 Start free trial')}
+              : (language === 'fr' ? 'Commencer l\'essai gratuit' : 'Start free trial')}
           </button>
 
           {error && (
-            <p className="mt-2 text-sm text-red-600 text-center">{error}</p>
+            <p className="mt-2 text-center text-sm text-rose-300" role="alert">{error}</p>
           )}
         </motion.form>
       </div>
@@ -307,4 +308,4 @@ function TrialForm() {
   );
 }
 
-export default TrialForm; 
+export default TrialForm;

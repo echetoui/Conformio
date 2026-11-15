@@ -10,24 +10,26 @@ interface FAQItemProps {
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(true);
   const contentId = useId();
+  const questionId = `${contentId}-question`;
 
   return (
-    <div className="bg-white">
+    <div className="glass-panel rounded-2xl px-5">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
+        id={questionId}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className="w-full py-4 flex items-center justify-between text-left"
+        className="focus-ring flex w-full items-center justify-between py-5 text-left"
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
       >
-        <span className="text-lg font-medium text-gray-900">{question}</span>
+        <span className="text-lg font-medium text-slate-100">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
           className="flex-shrink-0 ml-4"
         >
-          <ChevronDown className="w-5 h-5 text-blue-600" />
+          <ChevronDown className="w-5 h-5 text-cyan-300" aria-hidden="true" />
         </motion.div>
       </motion.button>
       <AnimatePresence>
@@ -40,8 +42,9 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
             className="overflow-hidden"
             id={contentId}
             role="region"
+            aria-labelledby={questionId}
           >
-            <div className="pb-6 text-gray-600">
+            <div className="pb-6 text-slate-300">
               {answer}
             </div>
           </motion.div>
@@ -51,4 +54,4 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   );
 };
 
-export default FAQItem; 
+export default FAQItem;

@@ -4,10 +4,6 @@
 # Règles globales pour tous les bots
 User-agent: *
 Allow: /
-Allow: /#/
-Allow: /#/privacy
-Allow: /#/terms
-Allow: /#/contact
 
 # Désactiver les fichiers indésirables
 Disallow: /.git/
@@ -17,7 +13,7 @@ Disallow: /scripts/
 Disallow: *.map
 
 # Sitemap
-Sitemap: https://conformio.ca/sitemap.xml
+Sitemap: https://www.conformio.ca/sitemap.xml
 
 # Crawl Delay (délai entre les requêtes - 0.5 secondes)
 Crawl-delay: 0.5

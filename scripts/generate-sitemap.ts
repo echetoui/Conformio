@@ -18,32 +18,50 @@ interface SitemapEntry {
   priority?: number;
 }
 
-const baseUrl = 'https://conformio.ca';
+const baseUrl = 'https://www.conformio.ca';
 
 function getSitemapEntries(): SitemapEntry[] {
   const today = new Date().toISOString().split('T')[0];
 
   return [
     {
-      loc: `${baseUrl}/#/`,
+      loc: `${baseUrl}/fr`,
       lastmod: today,
       changefreq: 'weekly',
       priority: 1.0,
     },
     {
-      loc: `${baseUrl}/#/privacy`,
+      loc: `${baseUrl}/en`,
+      lastmod: today,
+      changefreq: 'weekly',
+      priority: 0.9,
+    },
+    {
+      loc: `${baseUrl}/fr/methode-conformite`,
+      lastmod: today,
+      changefreq: 'monthly',
+      priority: 0.8,
+    },
+    {
+      loc: `${baseUrl}/en/compliance-method`,
+      lastmod: today,
+      changefreq: 'monthly',
+      priority: 0.8,
+    },
+    {
+      loc: `${baseUrl}/privacy`,
       lastmod: today,
       changefreq: 'monthly',
       priority: 0.5,
     },
     {
-      loc: `${baseUrl}/#/terms`,
+      loc: `${baseUrl}/terms`,
       lastmod: today,
       changefreq: 'monthly',
       priority: 0.5,
     },
     {
-      loc: `${baseUrl}/#/contact`,
+      loc: `${baseUrl}/contact`,
       lastmod: today,
       changefreq: 'monthly',
       priority: 0.7,
@@ -89,19 +107,21 @@ ${urlElements}
 function main() {
   try {
     const xml = generateSitemapXml();
-    const outputPath = path.join(__dirname, '../public/sitemap.xml');
+    const outputPaths = [
+      path.join(__dirname, '../public/sitemap.xml'),
+      path.join(__dirname, '../dist/sitemap.xml'),
+    ];
 
-    // Créer le dossier public s'il n'existe pas
-    const publicDir = path.dirname(outputPath);
-    if (!fs.existsSync(publicDir)) {
-      fs.mkdirSync(publicDir, { recursive: true });
+    for (const outputPath of outputPaths) {
+      const outputDir = path.dirname(outputPath);
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+      fs.writeFileSync(outputPath, xml, 'utf-8');
     }
 
-    // Écrire le fichier
-    fs.writeFileSync(outputPath, xml, 'utf-8');
-
     console.log('✅ Sitemap généré avec succès!');
-    console.log(`📍 Fichier: ${outputPath}`);
+    console.log(`📍 Fichiers: ${outputPaths.join(', ')}`);
     console.log(`📊 Nombre d'URLs: ${xml.match(/<url>/g)?.length || 0}`);
   } catch (error) {
     console.error('❌ Erreur lors de la génération du sitemap:', error);

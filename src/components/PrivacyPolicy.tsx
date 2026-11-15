@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { PageHelmet } from './PageHelmet';
+import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
   const { language } = useLanguage();
@@ -10,7 +11,18 @@ const PrivacyPolicy = () => {
       <PageHelmet metaKey="privacy" />
       <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+        <nav className="mb-10 flex flex-wrap gap-4 text-sm" aria-label="Navigation interne">
+          <Link to={language === 'en' ? '/en' : '/fr'} className="text-blue-600 hover:underline">
+            {language === 'fr' ? 'Accueil' : 'Home'}
+          </Link>
+          <Link to="/terms" className="text-blue-600 hover:underline">
+            {language === 'fr' ? 'Conditions d’utilisation' : 'Terms of service'}
+          </Link>
+          <Link to="/contact" className="text-blue-600 hover:underline">
+            {language === 'fr' ? 'Contact' : 'Contact'}
+          </Link>
+        </nav>
+        <h1 tabIndex={-1} className="text-3xl font-bold text-gray-900 mb-8 focus:outline-none">
           {language === 'fr' ? 'Politique de Confidentialité' : 'Privacy Policy'}
         </h1>
         
@@ -27,8 +39,8 @@ const PrivacyPolicy = () => {
             </h2>
             <p className="text-gray-600 mb-4">
               {language === 'fr'
-                ? 'Conformio, une entreprise québécoise, s\'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles.'
-                : 'Conformio, a Quebec-based company, is committed to protecting your privacy. This privacy policy explains how we collect, use, and protect your personal information.'}
+                ? 'Conformio est une entreprise québécoise. Nous protégeons votre vie privée. Cette politique explique comment nous recueillons et utilisons vos renseignements personnels.'
+                : 'Conformio is a Quebec-based company. We protect your privacy. This policy explains how we collect and use your personal information.'}
             </p>
           </section>
 
@@ -38,8 +50,8 @@ const PrivacyPolicy = () => {
             </h2>
             <p className="text-gray-600 mb-4">
               {language === 'fr'
-                ? 'Nous collectons les informations que vous nous fournissez directement, notamment votre nom, votre adresse e-mail et vos coordonnées professionnelles.'
-                : 'We collect information that you provide directly to us, including your name, email address, and professional contact information.'}
+                ? 'Nous recueillons les informations que vous nous donnez. Cela peut inclure votre nom, votre courriel, votre entreprise et vos coordonnées professionnelles.'
+                : 'We collect information that you give us. This may include your name, email, company, and professional contact details.'}
             </p>
           </section>
 
@@ -53,9 +65,9 @@ const PrivacyPolicy = () => {
                 : 'We use your information to:'}
             </p>
             <ul className="list-disc pl-6 text-gray-600 mb-4">
-              <li>{language === 'fr' ? 'Fournir nos services de conformité' : 'Provide our compliance services'}</li>
-              <li>{language === 'fr' ? 'Communiquer avec vous concernant nos services' : 'Communicate with you about our services'}</li>
-              <li>{language === 'fr' ? 'Améliorer notre plateforme' : 'Improve our platform'}</li>
+              <li>{language === 'fr' ? 'Répondre à vos demandes' : 'Respond to your requests'}</li>
+              <li>{language === 'fr' ? 'Organiser nos échanges' : 'Organize our conversations'}</li>
+              <li>{language === 'fr' ? 'Améliorer le site' : 'Improve the site'}</li>
             </ul>
           </section>
 
@@ -65,8 +77,8 @@ const PrivacyPolicy = () => {
             </h2>
             <p className="text-gray-600 mb-4">
               {language === 'fr'
-                ? 'Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations personnelles contre tout accès, modification, divulgation ou destruction non autorisés.'
-                : 'We implement appropriate security measures to protect your personal information against unauthorized access, modification, disclosure, or destruction.'}
+                ? 'Nous prenons des mesures raisonnables pour protéger vos informations. Elles visent à réduire les risques d’accès, de perte ou de divulgation non autorisés.'
+                : 'We take reasonable steps to protect your information. These steps reduce the risk of unauthorized access, loss, or disclosure.'}
             </p>
           </section>
 
@@ -92,4 +104,4 @@ const PrivacyPolicy = () => {
   );
 };
 
-export default PrivacyPolicy; 
+export default PrivacyPolicy;

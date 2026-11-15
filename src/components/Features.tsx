@@ -1,60 +1,79 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { SpatialIllustrationVariant, SpatialInterfacePreview } from './SpatialIllustration';
 
 const Features = () => {
   const { t } = useLanguage();
 
   const steps = [
     {
-      icon: '🔌',
+      variant: 'connect' as SpatialIllustrationVariant,
+      eyebrow: 'Map',
+      imageSrc: '/images/workflow/map-workflow.webp',
+      imageAlt: 'Cartographie holographique des obligations, normes et contrôles interconnectés',
       title: t('features.step1.title'),
       description: t('features.step1.description'),
     },
     {
-      icon: '🧠',
+      variant: 'intelligence' as SpatialIllustrationVariant,
+      eyebrow: 'Read',
+      imageSrc: '/images/workflow/read-workflow.webp',
+      imageAlt: 'Scanner intelligent révélant les écarts prioritaires dans les documents de conformité',
       title: t('features.step2.title'),
       description: t('features.step2.description'),
     },
     {
-      icon: '🗺️',
+      variant: 'roadmap' as SpatialIllustrationVariant,
+      eyebrow: 'Sequence',
+      imageSrc: '/images/workflow/sequence-workflow.webp',
+      imageAlt: 'Feuille de route tridimensionnelle avec étapes, jalons et connexions lumineuses',
       title: t('features.step3.title'),
       description: t('features.step3.description'),
     },
     {
-      icon: '📈',
+      variant: 'monitoring' as SpatialIllustrationVariant,
+      eyebrow: 'Review',
+      imageSrc: '/images/workflow/review-workflow.webp',
+      imageAlt: 'Coffre documentaire numérique présentant les validations et l’historique des preuves',
       title: t('features.step4.title'),
       description: t('features.step4.description'),
     },
   ];
 
   return (
-    <section id="features" className="py-16 md:py-32 bg-bg/50" aria-labelledby="features-title">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 id="features-title" className="text-3xl md:text-4xl font-bold text-text mb-4">
+    <section id="features" className="spatial-section border-y border-white/5 bg-slate-950/30" aria-labelledby="features-title">
+      <div className="spatial-container">
+        <div className="spatial-section-header mx-auto max-w-4xl text-center">
+          <h2 id="features-title" className="spatial-heading">
             {t('features.title')}
           </h2>
-          <p className="text-xl text-text/80">
+          <p className="spatial-copy mx-auto mt-4 max-w-2xl text-xl">
             {t('features.subtitle')}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="spatial-workflow-grid">
           {steps.map((step, index) => (
             <div
               key={index}
-              className="p-8 rounded-2xl bg-white hover:bg-bg/80 transition-colors"
+              className="spatial-editorial-card spatial-workflow-card spatial-card"
               role="article"
               aria-labelledby={`step-title-${index}`}
             >
-              <div className="flex flex-col items-center text-center">
-                <div className="text-4xl mb-4" aria-hidden="true">
-                  {step.icon}
+              <div className="text-left">
+                <SpatialInterfacePreview
+                  variant={step.variant}
+                  imageSrc={step.imageSrc}
+                  imageAlt={step.imageAlt}
+                />
+                <div className="spatial-step-meta mt-5">
+                  <span className="spatial-step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <p className="spatial-eyebrow">{step.eyebrow}</p>
                 </div>
-                <h3 id={`step-title-${index}`} className="text-xl font-semibold text-text mb-2">
+                <h3 id={`step-title-${index}`} className="mb-2 mt-2 text-xl font-semibold text-slate-100">
                   {step.title}
                 </h3>
-                <p className="text-text/80">
+                <p className="text-slate-300/85">
                   {step.description}
                 </p>
               </div>

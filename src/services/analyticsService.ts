@@ -1,30 +1,47 @@
-// Service d'analytique désactivé pour résoudre le problème de page blanche
+const GOOGLE_ANALYTICS_ID = 'G-YSYYZF227G';
+const SCRIPT_ID = 'conformio-google-analytics';
 
-// Fonctions vides qui ne font rien pour éviter les erreurs
-export const trackEvent = (eventName: string, properties: Record<string, any> = {}) => {
-  // Désactivé - remplacé par console.log en développement
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[Analytics]', eventName, properties);
-  }
+type AnalyticsWindow = Window & {
+  dataLayer?: unknown[];
+  gtag?: (...args: unknown[]) => void;
 };
 
-export const identifyUser = (userId: string, userProperties: Record<string, any> = {}) => {
-  // Désactivé
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[Analytics] Identify User', userId, userProperties);
-  }
+export function loadAnalytics(): void {
+  if (typeof window === 'undefined' || document.getElementById(SCRIPT_ID)) return;
+
+  const analyticsWindow = window as AnalyticsWindow;
+  analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
+  analyticsWindow.gtag = (...args: unknown[]) => {
+    analyticsWindow.dataLayer?.push(args);
+  };
+  analyticsWindow.gtag('js', new Date());
+  analyticsWindow.gtag('config', GOOGLE_ANALYTICS_ID, { anonymize_ip: true });
+
+  const script = document.createElement('script');
+  script.id = SCRIPT_ID;
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`;
+  document.head.appendChild(script);
+}
+
+export function disableAnalytics(): void {
+  if (typeof document === 'undefined') return;
+  document.getElementById(SCRIPT_ID)?.remove();
+}
+
+export const trackEvent = (eventName: string, properties: Record<string, unknown> = {}) => {
+  (window as AnalyticsWindow).gtag?.('event', eventName, properties);
 };
 
-export const trackPageView = (pageName: string, properties: Record<string, any> = {}) => {
-  // Désactivé
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[Analytics] Page View', pageName, properties);
-  }
+export const identifyUser = (userId: string, userProperties: Record<string, unknown> = {}) => {
+  void userId;
+  void userProperties;
+};
+
+export const trackPageView = (pageName: string, properties: Record<string, unknown> = {}) => {
+  (window as AnalyticsWindow).gtag?.('event', 'page_view', { page_path: pageName, ...properties });
 };
 
 export const resetUser = () => {
-  // Désactivé
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[Analytics] Reset User');
-  }
+  void 0;
 };

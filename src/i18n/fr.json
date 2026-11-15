@@ -1,13 +1,13 @@
 {
   "hero": {
-    "title": "La conformité au service de votre croissance",
-    "subtitle": "De la TGV à SOC 2, tout ce qu'il faut pour inspirer confiance à vos clients et investisseurs",
-    "emailPlaceholder": "Entrez votre email"
+    "title": "Donnez une portée internationale à votre conformité",
+    "subtitle": "Structurez vos exigences SOC 2, ISO 27001, Loi 25 et TGV depuis le Québec, avec une feuille de route claire pour vos marchés canadiens et internationaux.",
+    "emailPlaceholder": "Votre adresse email professionnelle"
   },
   "nav": {
     "features": "Fonctionnalités",
     "benefits": "Avantages",
-    "about": "À propos",
+    "about": "Questions",
     "contact": "Contact"
   }
-} 
+}

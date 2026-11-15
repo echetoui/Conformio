@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { trackPageView } from './services/analyticsService';
 import Hero from './components/Hero';
@@ -14,6 +14,8 @@ const TrialForm = lazy(() => import('./components/TrialForm'));
 const Footer = lazy(() => import('./components/Footer'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/TermsOfService'));
+const ContactPage = lazy(() => import('./components/ContactPage'));
+const MethodPage = lazy(() => import('./components/MethodPage'));
 
 const SectionLoader = () => (
   <div className="w-full h-32 flex items-center justify-center">
@@ -24,8 +26,11 @@ const SectionLoader = () => (
 const HomePage = () => (
   <>
     <PageHelmet metaKey="home" />
+    <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-cyan-300 focus:px-4 focus:py-2 focus:font-semibold focus:text-slate-950">
+      Aller au contenu principal
+    </a>
     <Header />
-    <main>
+    <main id="main-content" data-site-content="true" className="spatial-shell overflow-hidden">
       <Hero />
       <Suspense fallback={<SectionLoader />}>
         <Benefits />
@@ -47,51 +52,48 @@ const HomePage = () => (
   </>
 );
 
-const ContactRedirect = () => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      window.location.href = 'https://cal.com/conformio';
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <>
-      <PageHelmet metaKey="contact" />
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Redirection vers le calendrier...</h1>
-          <p className="text-gray-600">
-            Si vous n'êtes pas redirigé automatiquement,{' '}
-            <a
-              href="https://cal.com/conformio"
-              className="text-blue-600 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              cliquez ici
-            </a>
-          </p>
-        </div>
-      </div>
-    </>
-  );
-};
-
 export function App() {
   const location = useLocation();
+  const hasMountedLocation = useRef(false);
 
   useEffect(() => {
     trackPageView(location.pathname);
   }, [location]);
 
+  useEffect(() => {
+    if (!hasMountedLocation.current) {
+      hasMountedLocation.current = true;
+      return;
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    requestAnimationFrame(() => {
+      document.querySelector<HTMLElement>('main h1')?.focus({ preventScroll: true });
+    });
+  }, [location.pathname]);
+
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-white font-sans selection:bg-blue-100 selection:text-blue-900">
+      <div className="min-h-screen font-sans selection:bg-cyan-200 selection:text-slate-950">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/contact" element={<ContactRedirect />} />
+          <Route path="/fr" element={<HomePage />} />
+          <Route path="/en" element={<HomePage />} />
+          <Route path="/contact" element={
+            <Suspense fallback={<SectionLoader />}>
+              <ContactPage />
+            </Suspense>
+          } />
+          <Route path="/fr/methode-conformite" element={
+            <Suspense fallback={<SectionLoader />}>
+              <MethodPage />
+            </Suspense>
+          } />
+          <Route path="/en/compliance-method" element={
+            <Suspense fallback={<SectionLoader />}>
+              <MethodPage />
+            </Suspense>
+          } />
           <Route path="/privacy" element={
             <Suspense fallback={<SectionLoader />}>
               <PrivacyPolicy />

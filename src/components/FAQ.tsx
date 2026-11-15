@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import FAQItem from './FAQItem';
 import { motion } from 'framer-motion';
 
 const FAQ = () => {
   const { language } = useLanguage();
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
 
   const faqItems = {
     fr: [
@@ -47,41 +45,22 @@ const FAQ = () => {
     ]
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section 
-      ref={sectionRef}
-      className="py-24 bg-white"
+      className="spatial-section"
       id="about"
     >
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="spatial-container max-w-4xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="spatial-heading">
             {language === 'fr' ? 'Questions fréquentes' : 'Frequently Asked Questions'}
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="spatial-copy mx-auto mt-4 max-w-2xl text-xl">
             {language === 'fr' 
               ? 'Pourquoi la conformité est un levier pour les startups québécoises ?' 
               : 'Why compliance is a growth lever for Quebec startups?'}
@@ -89,8 +68,8 @@ const FAQ = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : {}}
+          initial={false}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="space-y-4"
         >
@@ -107,4 +86,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ; 
+export default FAQ;
